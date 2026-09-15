@@ -1,0 +1,39 @@
+{
+  "historical_records": [
+    {"year": 2018, "monsoon_rainfall_mm": 4200, "state": "Meghalaya", "incidents": 64, "major_event": "Cherrapunji-Mawsynram Floods & NH-6 Cutoff"},
+    {"year": 2018, "monsoon_rainfall_mm": 2900, "state": "Arunachal Pradesh", "incidents": 41, "major_event": "Tawang Sela Pass Blockade"},
+    {"year": 2018, "monsoon_rainfall_mm": 3100, "state": "Sikkim", "incidents": 53, "major_event": "NH-10 Multiple Breaches"},
+    {"year": 2019, "monsoon_rainfall_mm": 4500, "state": "Meghalaya", "incidents": 78, "major_event": "Dawki Gorge Debris Flow"},
+    {"year": 2019, "monsoon_rainfall_mm": 3200, "state": "Arunachal Pradesh", "incidents": 49, "major_event": "Bomdila-Rupa Highway Collapse"},
+    {"year": 2019, "monsoon_rainfall_mm": 3400, "state": "Sikkim", "incidents": 62, "major_event": "North Sikkim Lachung Cutoff"},
+    {"year": 2020, "monsoon_rainfall_mm": 4100, "state": "Meghalaya", "incidents": 59, "major_event": "Shillong Bypass Minor Slides"},
+    {"year": 2020, "monsoon_rainfall_mm": 3050, "state": "Arunachal Pradesh", "incidents": 44, "major_event": "Pasighat Foothill Slope Failure"},
+    {"year": 2020, "monsoon_rainfall_mm": 3300, "state": "Sikkim", "incidents": 58, "major_event": "Ravangla Sinking Zone"},
+    {"year": 2021, "monsoon_rainfall_mm": 4700, "state": "Meghalaya", "incidents": 84, "major_event": "Mawsynram Record Downpour (1000mm/48h)"},
+    {"year": 2021, "monsoon_rainfall_mm": 3450, "state": "Arunachal Pradesh", "incidents": 56, "major_event": "Anini Isolated 12 Days"},
+    {"year": 2021, "monsoon_rainfall_mm": 3600, "state": "Sikkim", "incidents": 71, "major_event": "Pelling Road Instability"},
+    {"year": 2022, "monsoon_rainfall_mm": 5100, "state": "Meghalaya", "incidents": 112, "major_event": "Massive Sohra Sandstone Collapse"},
+    {"year": 2022, "monsoon_rainfall_mm": 3900, "state": "Arunachal Pradesh", "incidents": 79, "major_event": "Dibang Valley Cloudburst & Rockfall"},
+    {"year": 2022, "monsoon_rainfall_mm": 3850, "state": "Sikkim", "incidents": 88, "major_event": "Gangtok-Singtam Road Subsidences"},
+    {"year": 2023, "monsoon_rainfall_mm": 4900, "state": "Meghalaya", "incidents": 95, "major_event": "NH-6 Jaintia Hills Repeated Blockades"},
+    {"year": 2023, "monsoon_rainfall_mm": 4100, "state": "Arunachal Pradesh", "incidents": 87, "major_event": "Sela-Tawang Route Mudslides"},
+    {"year": 2023, "monsoon_rainfall_mm": 4600, "state": "Sikkim", "incidents": 142, "major_event": "Teesta Chungthang Dam Breach & GLOF Disaster"},
+    {"year": 2024, "monsoon_rainfall_mm": 4850, "state": "Meghalaya", "incidents": 89, "major_event": "East Khasi Hills Cloudburst Alert"},
+    {"year": 2024, "monsoon_rainfall_mm": 3950, "state": "Arunachal Pradesh", "incidents": 72, "major_event": "Anini & Tawang LoRa Mesh Early Detection"},
+    {"year": 2024, "monsoon_rainfall_mm": 4200, "state": "Sikkim", "incidents": 98, "major_event": "Lachung & Chungthang Pre-Evacuation"}
+  ],
+  "monthly_cyclicity": [
+    {"month": "Jan", "avg_rain_mm": 20, "incidents": 2},
+    {"month": "Feb", "avg_rain_mm": 35, "incidents": 3},
+    {"month": "Mar", "avg_rain_mm": 110, "incidents": 8},
+    {"month": "Apr", "avg_rain_mm": 280, "incidents": 22},
+    {"month": "May", "avg_rain_mm": 540, "incidents": 45},
+    {"month": "Jun", "avg_rain_mm": 1150, "incidents": 140},
+    {"month": "Jul", "avg_rain_mm": 1380, "incidents": 195},
+    {"month": "Aug", "avg_rain_mm": 920, "incidents": 125},
+    {"month": "Sep", "avg_rain_mm": 610, "incidents": 82},
+    {"month": "Oct", "avg_rain_mm": 240, "incidents": 24},
+    {"month": "Nov", "avg_rain_mm": 45, "incidents": 5},
+    {"month": "Dec", "avg_rain_mm": 15, "incidents": 1}
+  ]
+}

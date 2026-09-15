@@ -1,0 +1,16 @@
+{
+  "name": "NER KAVACH 3.0 — AI Landslide Early Warning",
+  "short_name": "NER KAVACH",
+  "description": "AI-Based Early Warning & Landslide Risk Monitoring System for North Eastern Region",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0f1d",
+  "theme_color": "#0a0f1d",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

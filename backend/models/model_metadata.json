@@ -1,0 +1,35 @@
+{
+  "model_type": "GradientBoosting + RandomForest Ensemble (XGBoost Equivalent)",
+  "features": [
+    "slope_deg",
+    "rainfall_24h_mm",
+    "rainfall_72h_mm",
+    "elevation_m",
+    "soil_moisture_pct",
+    "pore_pressure_kpa",
+    "insar_deformation_mm_yr",
+    "lithology_factor",
+    "vibration_g"
+  ],
+  "feature_importances": {
+    "slope_deg": 0.0643,
+    "rainfall_24h_mm": 0.0911,
+    "rainfall_72h_mm": 0.0309,
+    "elevation_m": 0.0128,
+    "soil_moisture_pct": 0.1071,
+    "pore_pressure_kpa": 0.4185,
+    "insar_deformation_mm_yr": 0.1018,
+    "lithology_factor": 0.0172,
+    "vibration_g": 0.1564
+  },
+  "metrics": {
+    "accuracy": 0.9,
+    "r2_score": 0.9242,
+    "total_samples": 650
+  },
+  "classes": [
+    "LOW (0-39%)",
+    "MODERATE (40-69%)",
+    "HIGH (70-100%)"
+  ]
+}

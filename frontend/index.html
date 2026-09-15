@@ -1,0 +1,2246 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>NER KAVACH 3.0 — Arunachal Pradesh Landslide Early Warning System</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+  <link rel="stylesheet" href="leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 🛡️ FULLSCREEN 3-SECOND STARTUP SPLASH SCREEN -->
+  <div id="app-splash-screen" class="app-splash-screen">
+    <div class="splash-backdrop-glow"></div>
+    
+    <div class="splash-center-content">
+      <!-- Animated Shield Logo Container -->
+      <div class="splash-logo-wrapper">
+        <div class="splash-pulse-ring ring-1"></div>
+        <div class="splash-pulse-ring ring-2"></div>
+        <div class="splash-shield-box">
+          <svg class="splash-shield-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="splashGradOuter" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38bdf8"/>
+                <stop offset="50%" stop-color="#0284c7"/>
+                <stop offset="100%" stop-color="#0369a1"/>
+              </linearGradient>
+              <linearGradient id="splashGradInner" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0ea5e9"/>
+                <stop offset="100%" stop-color="#0f172a"/>
+              </linearGradient>
+              <filter id="splashShieldGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+              </filter>
+            </defs>
+            <!-- Outer Shield -->
+            <path d="M50 8 L85 22 V50 C85 71 50 92 50 92 C50 92 15 71 15 50 V22 L50 8 Z" fill="url(#splashGradOuter)" stroke="#38bdf8" stroke-width="2.5" filter="url(#splashShieldGlow)"/>
+            <!-- Inner Shield Plate -->
+            <path d="M50 16 L78 27 V48 C78 66 50 83 50 83 C50 83 22 66 22 48 V27 L50 16 Z" fill="url(#splashGradInner)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+            <!-- Mountain Contours -->
+            <path d="M30 60 L42 46 L52 54 L62 40 L70 52" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M26 66 L38 52 L50 60 L60 48 L74 62" stroke="rgba(56, 189, 248, 0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Sensor Radar Pulse Beacon -->
+            <circle cx="50" cy="34" r="5" fill="#f59e0b"/>
+            <circle cx="50" cy="34" r="9" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2" opacity="0.8"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- App Title & Sector Details -->
+      <div class="splash-brand-titles">
+        <div class="splash-name-row">
+          <span class="splash-title">NER KAVACH</span>
+          <span class="splash-version-pill">AR 3.0</span>
+        </div>
+        <div class="splash-subtitle">AUTONOMOUS GEOTECHNICAL AI SENTINEL</div>
+        <div class="splash-sector-badge">ARUNACHAL PRADESH • NORTHEAST REGION</div>
+      </div>
+
+      <!-- Official Quotation Box -->
+      <div class="splash-quotation-card">
+        <div class="splash-quote-mark left">“</div>
+        <div class="splash-quote-text">Detect Early and Alert Instantly</div>
+        <div class="splash-quote-mark right">”</div>
+      </div>
+
+      <!-- 3-Second Micro-Progress Bar -->
+      <div class="splash-progress-container">
+        <div class="splash-progress-bar">
+          <div class="splash-progress-fill"></div>
+        </div>
+        <div class="splash-loading-text">
+          <span class="splash-spinner-dot"></span>
+          <span>Initializing AI Telemetry & LoRa Mesh Engine...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Institutional Endorsement Footer -->
+    <div class="splash-footer">
+      <div class="splash-gov-text">Ministry of Mines • DDMA / SDMA Arunachal Pradesh</div>
+      <div class="splash-sih-tag">SIH26001 • National Early Warning Network</div>
+    </div>
+  </div>
+
+  <div class="mobile-app-container">
+
+    <!-- 🚨 TOP ARUNACHAL HIGHWAY ALERT MARQUEE -->
+    <div class="top-marquee-bar">
+      <div class="marquee-track">
+        <span class="marquee-item">⚠️ <b>NH-13:</b> Blocked at Baisakhi & Rupa (Tawang/Bomdila Axis)</span>
+        <span class="marquee-item">⚠️ <b>NH-313:</b> Landslide Active in Anini / Dibang Valley</span>
+        <span class="marquee-item">🟢 <b>NH-415:</b> Capital Corridor Clear (Itanagar)</span>
+        <span class="marquee-item">⚡ <b>LoRa Mesh:</b> 5 Solar Nodes Online across Arunachal Pradesh (192.168.1.1)</span>
+      </div>
+    </div>
+
+    <!-- 🛡️ SLEEK MOBILE APP HEADER (ARUNACHAL SECTOR) -->
+    <header class="mobile-header">
+      <div class="header-top-row">
+        <div class="app-brand">
+          <div class="shield-badge">🛡️</div>
+          <div class="brand-titles">
+            <div class="brand-name-row">
+              <span class="brand-title" data-i18n="app_title">NER KAVACH</span>
+              <span class="sih-tag">SIH26001</span>
+            </div>
+            <span class="brand-subtitle" data-i18n="app_subtitle">AI Early Warning System</span>
+          </div>
+        </div>
+        <div class="header-right-actions">
+          <!-- 🌐 Quick Language Switcher Pill -->
+          <button id="lang-switcher-btn" class="lang-switcher-btn" onclick="openLanguageModal()" title="Change Language / भाषा बदलें">
+            <span class="lang-btn-globe">🌐</span>
+            <span id="current-lang-code">English</span>
+          </button>
+          <div id="connectivity-pill" class="status-pill online">
+            <span class="pulse-dot"></span>
+            <span class="status-text" data-i18n="status_online">ONLINE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Segmented Mode Controller (PDF Sec 12) -->
+      <div class="segmented-mode-bar">
+        <button class="seg-btn active" data-mode="AUTOMATIC_ONLINE" data-i18n="online_auto">🟢 Online Auto</button>
+        <button class="seg-btn" data-mode="AUTOMATIC_OFFLINE" data-i18n="offline_auto">🔴 Offline Auto</button>
+        <button class="seg-btn" data-mode="WEATHER_NEWS" data-i18n="news_tab">📰 News</button>
+      </div>
+
+      <!-- Offline Cached Warning Banner -->
+      <div id="cached-warning-banner" class="cached-banner hidden">
+        <div class="banner-icon">⚠️</div>
+        <div class="banner-content">
+          <div class="banner-title">OFFLINE SECTOR MODE (ARUNACHAL)</div>
+          <div class="banner-desc">Internet down in high altitude. Using cached IMD grid & live LoRa solar mesh.</div>
+        </div>
+        <button id="sync-now-btn" class="sync-action-btn">Sync 🔄</button>
+      </div>
+    </header>
+
+    <!-- 📱 SCROLLABLE CONTENT BODY -->
+    <main class="mobile-body">
+
+      <!-- 2x2 COMPACT KPI METRICS GRID (ARUNACHAL SPECIFIC) -->
+      <section id="main-kpi-grid" class="kpi-grid">
+        <div class="kpi-card card-risk clickable-kpi" onclick="openKpiModal('sectors')" title="Click for High Risk Sector Details">
+          <div class="kpi-header">
+            <span class="kpi-icon">⚠️</span>
+            <span class="kpi-tag" data-i18n="critical_tag">CRITICAL</span>
+          </div>
+          <div class="kpi-val text-red">3 / 5</div>
+          <div class="kpi-label" data-i18n="kpi_high_risk_title">High Risk Sectors</div>
+          <div class="kpi-sub" data-i18n="kpi_high_risk_sub">Tawang • Bomdila • Anini ℹ️</div>
+        </div>
+
+        <div class="kpi-card card-roads clickable-kpi" onclick="openKpiModal('roads')" title="Click for Road Blockade Details">
+          <div class="kpi-header">
+            <span class="kpi-icon">🚧</span>
+            <span class="kpi-tag text-amber" data-i18n="blocked_tag">BLOCKED</span>
+          </div>
+          <div class="kpi-val text-amber">2 Roads</div>
+          <div class="kpi-label" data-i18n="kpi_roads_title">Highway Blockades</div>
+          <div class="kpi-sub" data-i18n="kpi_roads_sub">NH-13 (Rupa) • NH-313 ℹ️</div>
+        </div>
+
+        <div class="kpi-card card-shelters clickable-kpi" onclick="openKpiModal('shelters')" title="Click for 5 Camps & Bed Capacity Details">
+          <div class="kpi-header">
+            <span class="kpi-icon">🏕️</span>
+            <span class="kpi-tag text-green" data-i18n="active_tag">ACTIVE</span>
+          </div>
+          <div class="kpi-val text-green">5 Hubs</div>
+          <div class="kpi-label" data-i18n="kpi_shelters_title">Army & Relief Shelters</div>
+          <div class="kpi-sub" data-i18n="kpi_shelters_sub">4,900 Bed Capacity ℹ️</div>
+        </div>
+
+        <div class="kpi-card card-mesh clickable-kpi" onclick="openKpiModal('mesh')" title="Click for LoRa Mesh Nodes Telemetry">
+          <div class="kpi-header">
+            <span class="kpi-icon">📡</span>
+            <span class="kpi-tag text-cyan" data-i18n="lora_mesh_tag">LORA MESH</span>
+          </div>
+          <div class="kpi-val text-cyan">192.168.1.1</div>
+          <div class="kpi-label" data-i18n="kpi_mesh_title">Arunachal Gateway</div>
+          <div class="kpi-sub" data-i18n="kpi_mesh_sub">5/5 Nodes Active (868MHz) ℹ️</div>
+        </div>
+      </section>
+
+      <!-- DEDICATED OFFLINE LANDSLIDE MONITOR (UNDER 4 BOXES) -->
+            <!-- 📡 DEDICATED OFFLINE LANDSLIDE & SAFE ROUTE MONITOR HUD -->
+      <section id="offline-landslide-monitor" class="offline-monitor-card hidden">
+        
+        <!-- PANE 1: OFFLINE MONITOR / TELEMETRY & GATEWAY -->
+        <div id="tab-offline-monitor" class="offline-sub-pane active">
+          <div class="offline-card-header">
+            <div class="offline-title-badge">
+              <span class="offline-shield-icon">🛡️</span>
+              <span class="offline-main-title">OFFLINE LANDSLIDE MONITOR</span>
+            </div>
+            <div class="offline-mode-tag">
+              <span class="pulse-dot-red"></span>
+              <span>🚨 OFFLINE MODE</span>
+            </div>
+          </div>
+
+          <!-- System & Connectivity Status -->
+          <div class="offline-meta-grid">
+            <div class="offline-meta-row">
+              <span class="offline-meta-label">Internet:</span>
+              <span class="offline-meta-val text-red">⚠️ Not Available</span>
+            </div>
+            <div class="offline-meta-row">
+              <span class="offline-meta-label">Weather:</span>
+              <span class="offline-meta-val text-amber">Using cached forecast</span>
+            </div>
+            <div class="offline-meta-row">
+              <span class="offline-meta-label">Last weather update:</span>
+              <span class="offline-meta-val text-cyan">10:15 PM</span>
+            </div>
+          </div>
+
+          <!-- GATEWAY DISCOVERY & CONNECT GATE -->
+          <div id="offline-gateway-search-box" class="offline-gateway-search-box">
+            <div class="gateway-search-badge">
+              <span class="pulse-dot-amber"></span>
+              <span id="gateway-status-text">LoRa Mesh: Disconnected (Offline)</span>
+            </div>
+            <p class="gateway-search-desc">Live telemetry and Geotechnical AI Digital Twin operate over the local 868MHz mesh network. Search for a nearby base station to establish a local connection.</p>
+            <button id="btn-discover-gateway" class="btn-discover-gateway" onclick="triggerGatewayDiscovery()">
+              <span class="btn-icon">🔍</span> Look for Local Gateway Connection
+            </button>
+            <div id="gateway-search-log" class="gateway-search-log hidden"></div>
+          </div>
+
+          <!-- HIDDEN TELEMETRY & DIGITAL TWIN (REVEALED AFTER GATEWAY CONNECTION) -->
+          <div id="offline-connected-content" class="offline-connected-content hidden">
+            <!-- Gateway Connected Strip -->
+            <div class="gateway-connected-strip">
+              <div class="gateway-connected-info">
+                <span class="pulse-dot-green"></span>
+                <span>Gateway: <b>ARUNACHAL_GW_001</b> (192.168.1.1) • 868.1MHz</span>
+              </div>
+              <button class="btn-disconnect-gateway" onclick="disconnectGateway()" title="Disconnect from gateway">Disconnect ✕</button>
+            </div>
+
+            <!-- Live Sensor Data Block -->
+            <div class="offline-section-title">
+              <span>📊 LIVE SENSOR DATA</span>
+              <span class="offline-node-id">Node: SEN_AR_001</span>
+            </div>
+
+            <div class="offline-sensor-box">
+              <!-- Rainfall Slider Bar -->
+              <div class="offline-slider-row">
+                <div class="offline-slider-header">
+                  <span class="sensor-name">🌧️ Rainfall Rate:</span>
+                  <span class="offline-slider-badge text-cyan" id="offline-rain-val">47 mm/h</span>
+                </div>
+                <input type="range" id="offline-rain-slider" class="mobile-slider" min="0" max="200" value="47" step="1">
+              </div>
+
+              <!-- Soil Moisture Slider Bar -->
+              <div class="offline-slider-row">
+                <div class="offline-slider-header">
+                  <span class="sensor-name">💧 Soil Moisture Saturation:</span>
+                  <span class="offline-slider-badge text-amber" id="offline-soil-val">84%</span>
+                </div>
+                <input type="range" id="offline-soil-slider" class="mobile-slider" min="0" max="100" value="84" step="1">
+              </div>
+
+              <!-- Ground Tilt Slider Bar -->
+              <div class="offline-slider-row">
+                <div class="offline-slider-header">
+                  <span class="sensor-name">📐 Ground Tilt Shear Rate:</span>
+                  <span class="offline-slider-badge text-amber" id="offline-tilt-val">6.1°</span>
+                </div>
+                <input type="range" id="offline-tilt-slider" class="mobile-slider" min="0" max="20" value="6.1" step="0.1">
+              </div>
+
+              <!-- Vibration Slider Bar -->
+              <div class="offline-slider-row">
+                <div class="offline-slider-header">
+                  <span class="sensor-name">⚡ Micro-Seismic Vibration:</span>
+                  <span class="offline-slider-badge text-red bold" id="offline-vib-val">HIGH (0.08g)</span>
+                </div>
+                <input type="range" id="offline-vib-slider" class="mobile-slider" min="0.01" max="0.15" value="0.08" step="0.01">
+              </div>
+            </div>
+
+            <!-- GEOTECHNICAL XGBOOST AI DIGITAL TWIN (OFFLINE EDGE) -->
+            <div class="offline-digital-twin-box">
+              <div class="offline-dt-header">
+                <div class="offline-dt-title-row">
+                  <span class="offline-dt-title">🧠 Geotechnical XGBoost AI Digital Twin</span>
+                  <span class="offline-edge-badge">⚡ 0.4ms Edge WASM</span>
+                </div>
+                <div class="offline-dt-subtitle">Calibrated for Arunachal Himalayan Gneiss & Mica Schist</div>
+              </div>
+
+              <!-- Circular Risk Meter -->
+              <div class="offline-gauge-wrapper">
+                <div class="offline-gauge-ring">
+                  <div id="offline-sim-risk-score" class="offline-gauge-number text-red">78.5%</div>
+                  <div id="offline-sim-risk-tier" class="offline-gauge-label text-red">HIGH HAZARD</div>
+                </div>
+              </div>
+
+              <!-- Geotechnical Factor Decomposition Chips -->
+              <div class="offline-triggers-label">🔍 Geotechnical Trigger Decomposition (SHAP):</div>
+              <div id="offline-triggers-box" class="offline-triggers-container">
+                <span class="offline-trigger-chip">💧 Soil Moisture: 84% (Critical Saturation)</span>
+                <span class="offline-trigger-chip">📐 Ground Tilt: 6.1° (Active Shear Strain)</span>
+                <span class="offline-trigger-chip">⚡ Vibration: HIGH (Fault Creep)</span>
+                <span class="offline-trigger-chip">🌧️ Rainfall: 47 mm (Antecedent Saturation)</span>
+              </div>
+            </div>
+
+            <!-- AI Risk & Evacuation Warning -->
+            <div class="offline-section-title" style="margin-top: 14px;">
+              <span>⚠️ AI RISK</span>
+              <span class="offline-edge-badge">Edge XGBoost</span>
+            </div>
+
+            <div class="offline-risk-container">
+              <div id="offline-risk-badge-box" class="offline-risk-badge-box risk-high">
+                <span id="offline-risk-badge-text" class="offline-risk-badge-text">⚠️ HIGH RISK</span>
+              </div>
+              <div id="offline-evac-banner" class="offline-evac-alert-banner evac-high">
+                <span id="offline-evac-icon" class="evac-alert-icon">🚨</span>
+                <span id="offline-evac-text" class="evac-alert-text">EVACUATION WARNING</span>
+              </div>
+            </div>
+
+            <!-- 🗺️ OFFLINE SURROUNDINGS & EVACUATION ROUTES ACTION BUTTON -->
+            <!-- Local LoRa Sync Action -->
+            <div class="offline-footer-action">
+              <div class="offline-sync-info">
+                <span>📡 Local Gateway: <b>192.168.1.1</b> (868 MHz)</span>
+                <span class="text-muted">Local Mesh & Gateway Store-and-Forward Active</span>
+              </div>
+              <button id="offline-sync-btn" class="offline-sync-btn" onclick="triggerOfflineSync()">
+                Sync Queue 🔄
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANE 2: DEDICATED OFFLINE SAFE ROUTE TAB (CLEAN SEAMLESS LAYOUT) -->
+        <div id="tab-offline-routes" class="offline-sub-pane hidden">
+            <!-- Compact Modern Header -->
+            <div class="safe-routes-top-bar">
+              <div class="safe-routes-title-group">
+                <span class="safe-routes-icon">🧭</span>
+                <span class="safe-routes-title">Safe Routes</span>
+                <span class="safe-routes-tag">🛰️ Satellite</span>
+              </div>
+              <button class="btn-expand-fullscreen-compact" onclick="toggleOfflineMapFullscreen(true)">
+                <span>⛶</span>
+                <span>Full Screen</span>
+              </button>
+            </div>
+
+            <!-- Surrounding Camps Minimalist Chip Bar -->
+            <div class="surroundings-camps-bar-compact">
+              <div class="camps-chips-scroll" id="offline-tab-camps-list">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Satellite Map Viewport -->
+            <div id="offline-map-wrapper" class="surroundings-map-wrapper">
+              <div id="offline-tab-routes-map" class="offline-surroundings-map-canvas"></div>
+              
+              <!-- Fullscreen Top HUD (Active in Fullscreen mode) -->
+              <div class="fullscreen-top-hud">
+                <div class="fs-hud-title-row">
+                  <div class="fs-hud-title">
+                    <span class="fs-live-dot"></span>
+                    <span>🛰️ SATELLITE ESCAPE MAP (OFFLINE)</span>
+                  </div>
+                  <div class="fs-hud-actions">
+                    <button class="fs-btn-layer" onclick="toggleOfflineMapLayer()" id="btn-fs-layer-toggle" title="Switch Map Layer">
+                      🛰️ Satellite
+                    </button>
+                    <button class="fs-btn-close" onclick="toggleOfflineMapFullscreen(false)" title="Exit Fullscreen">
+                      ✕ Minimize
+                    </button>
+                  </div>
+                </div>
+                <!-- Camp Fast Selectors inside Fullscreen -->
+                <div class="fs-camps-bar" id="fs-offline-camps-chips">
+                  <!-- dynamically populated -->
+                </div>
+              </div>
+
+              <!-- Map Legend -->
+              <div class="surroundings-map-legend">
+                <div class="legend-item"><span class="legend-dot user-pos"></span> You</div>
+                <div class="legend-item"><span class="legend-dot camp-pos"></span> Camp</div>
+                <div class="legend-item"><span class="legend-line route-safe"></span> 94% Safe</div>
+                <div class="legend-item"><span class="legend-line route-mod"></span> 68% Caution</div>
+                <div class="legend-item"><span class="legend-line route-danger"></span> 18% Blocked</div>
+              </div>
+
+              <!-- Floating Bottom HUD in Fullscreen -->
+              <div class="fullscreen-bottom-hud">
+                <div class="fs-route-selector-row">
+                  <button class="fs-route-pill active safest" id="fs-pill-A" onclick="selectOfflineTabRoute('A')">
+                    <span class="pill-dot" style="background:#10b981;"></span>
+                    <span>Route A (94%)</span>
+                  </button>
+                  <button class="fs-route-pill moderate" id="fs-pill-B" onclick="selectOfflineTabRoute('B')">
+                    <span class="pill-dot" style="background:#f59e0b;"></span>
+                    <span>Route B (68%)</span>
+                  </button>
+                  <button class="fs-route-pill hazardous" id="fs-pill-C" onclick="selectOfflineTabRoute('C')">
+                    <span class="pill-dot" style="background:#ef4444;"></span>
+                    <span>Route C (18%)</span>
+                  </button>
+                </div>
+                <div class="fs-hud-route-detail" id="fs-hud-route-detail-text">
+                  <div class="fs-detail-top">
+                    <b id="fs-detail-name" style="color: #34d399; font-size: 12px;">Route A: Sela Ridge Bypass</b>
+                    <span class="badge-pill safe" id="fs-detail-badge">94% SAFE</span>
+                  </div>
+                  <div class="fs-detail-meta" id="fs-detail-meta">
+                    <span>📏 2.4 km</span> • <span>⏱️ 18 mins</span> • <span>⛰️ +45m Ridge</span>
+                  </div>
+                  <div class="fs-detail-desc" id="fs-detail-desc">
+                    Stable granite bedrock ridge. Bypasses active mudflow zone.
+                  </div>
+                </div>
+                <div class="fs-hud-actions-row">
+                  <button class="btn-fs-voice" onclick="playOfflineTabRouteVoice()">
+                    <span>🔊</span>
+                    <span>Audio Guidance</span>
+                  </button>
+                  <button class="btn-fs-recenter" onclick="recenterOfflineTabRoutesMap()">
+                    <span>📍</span>
+                    <span>Recenter</span>
+                  </button>
+                  <button class="btn-fs-minimize" onclick="toggleOfflineMapFullscreen(false)">
+                    <span>🗗</span>
+                    <span>Standard View</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Tap to expand banner in normal view -->
+              <div class="map-tap-expand-hint" onclick="toggleOfflineMapFullscreen(true)">
+                <span>⛶ Tap Map to Expand Full Screen</span>
+              </div>
+
+              <!-- Recenter button in regular view -->
+              <button class="btn-map-recenter" onclick="recenterOfflineTabRoutesMap()" title="Recenter on Location">
+                📍 Recenter
+              </button>
+            </div>
+
+            
+            
+            <!-- 🧭 Compact AR Field Bearing Compass HUD -->
+            <div class="compass-hud-card" id="offline-compass-hud">
+              <div class="compass-hud-header">
+                <div class="compass-hud-title-box">
+                  <span class="compass-icon">🧭</span>
+                  <span class="compass-title">Field Evacuation Compass</span>
+                </div>
+                <span class="compass-bearing-badge" id="compass-bearing-readout">48° NE</span>
+              </div>
+              <div class="compass-dial-container">
+                <div class="compass-rose-wrapper">
+                  <div class="compass-rose" id="compass-rose">
+                    <span class="cardinal n">N</span>
+                    <span class="cardinal e">E</span>
+                    <span class="cardinal s">S</span>
+                    <span class="cardinal w">W</span>
+                    <div class="compass-target-needle" id="compass-target-needle">
+                      <div class="needle-arrow">▲</div>
+                    </div>
+                    <div class="compass-center-dot"></div>
+                  </div>
+                </div>
+                <div class="compass-info-column">
+                  <div class="compass-target-name" id="compass-target-name">Target: Tawang Army Relief Hub</div>
+                  <div class="compass-meta-row">
+                    <span class="compass-dist" id="compass-target-dist">📏 2.1 km</span>
+                    <span class="compass-slope" id="compass-target-slope">⛰️ +12° Safe Ridge</span>
+                  </div>
+                  <button class="btn-compass-orient" onclick="calibrateCompassHeading()">
+                    <span>🔄</span> <span>Orient Heading</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+<!-- Compact Multi-Route Selector Cards -->
+            <div class="surroundings-routes-section-compact">
+              <div class="routes-section-title-compact">
+                <span>⚡ SELECT EVACUATION CORRIDOR:</span>
+              </div>
+              <div class="routes-cards-grid-compact">
+                <!-- Route A Card (Safest) -->
+                <div id="tab-route-card-A" class="route-select-card-compact active safest" onclick="selectOfflineTabRoute('A')">
+                  <div class="route-card-top-compact">
+                    <div class="route-title-left">
+                      <span class="route-indicator-dot safe"></span>
+                      <span class="route-name-compact">Route A: Sela Ridge Bypass</span>
+                    </div>
+                    <span class="route-safety-badge-compact safe">94% SAFE</span>
+                  </div>
+                  <div class="route-card-meta-compact">
+                    <span>📏 2.4 km</span>
+                    <span>⏱️ 18 mins</span>
+                    <span class="meta-note">Granite ridge • Safe from mudflow</span>
+                  </div>
+                </div>
+
+                <!-- Route B Card (Alternative) -->
+                <div id="tab-route-card-B" class="route-select-card-compact moderate" onclick="selectOfflineTabRoute('B')">
+                  <div class="route-card-top-compact">
+                    <div class="route-title-left">
+                      <span class="route-indicator-dot moderate"></span>
+                      <span class="route-name-compact">Route B: Valley Stream Corridor</span>
+                    </div>
+                    <span class="route-safety-badge-compact moderate">68% CAUTION</span>
+                  </div>
+                  <div class="route-card-meta-compact">
+                    <span>📏 3.1 km</span>
+                    <span>⏱️ 25 mins</span>
+                    <span class="meta-note">Low ground • Minor stream debris</span>
+                  </div>
+                </div>
+
+                <!-- Route C Card (Hazard) -->
+                <div id="tab-route-card-C" class="route-select-card-compact hazardous" onclick="selectOfflineTabRoute('C')">
+                  <div class="route-card-top-compact">
+                    <div class="route-title-left">
+                      <span class="route-indicator-dot danger"></span>
+                      <span class="route-name-compact">Route C: Old NH-13 Highway</span>
+                    </div>
+                    <span class="route-safety-badge-compact danger">18% BLOCKED</span>
+                  </div>
+                  <div class="route-card-meta-compact">
+                    <span>📏 1.8 km</span>
+                    <span>⏱️ Blocked</span>
+                    <span class="meta-note text-red">Active landslide & road fracture</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Compact Turn-by-Turn Landmark Safety Checklist -->
+            <div class="surroundings-turn-section-compact">
+              <div class="turn-header-compact">
+                <span class="turn-title-compact" id="tab-selected-route-turn-title">📍 Route A: Waypoints & Landmarks</span>
+                <button class="btn-voice-guidance-compact" onclick="playOfflineTabRouteVoice()">
+                  <span>🔊</span>
+                  <span>Audio Guidance</span>
+                </button>
+              </div>
+              <div class="turn-list-compact" id="tab-surroundings-turn-checklist">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- PANE 4: OFFLINE HELP & REPORT TAB -->
+        <div id="tab-offline-report" class="offline-sub-pane hidden">
+          <div class="section-card">
+            <div class="card-title">🆘 Offline Hazard & Help Reporting</div>
+            <div class="card-subtitle">Transmit emergency assistance requests over Local LoRa / P2P Mesh</div>
+
+            <div class="offline-help-banner" style="margin-top: 10px;">
+              <div class="offline-help-text-group">
+                <span class="help-beacon-icon">📡</span>
+                <div>
+                  <div class="help-main-title">EMERGENCY ASSISTANCE & HAZARD REPORT</div>
+                  <div class="help-sub-desc">Report trapped persons, rockfalls, or road damage over Local Gateway (Zero Internet Required).</div>
+                </div>
+              </div>
+              <button class="btn-offline-help-pulse" onclick="openOfflineHelpDrawer()">
+                <span class="btn-help-icon">🆘</span>
+                <span class="btn-help-label">HELP / REPORT HAZARD</span>
+              </button>
+            </div>
+
+            
+              
+
+            
+              
+              <!-- 🚨 Tactical Rescue & Survival Tools Panel -->
+              <div class="emergency-toolkit-section">
+                <div class="toolkit-section-title">⚡ TACTICAL RESCUE & SURVIVAL TOOLKIT:</div>
+                <div class="toolkit-buttons-grid">
+                  <!-- Tool 1: SOS Strobe Beacon -->
+                  <div class="toolkit-btn strobe" onclick="openSosStrobeModal()">
+                    <span class="toolkit-btn-icon">🚨</span>
+                    <div class="toolkit-btn-text">
+                      <div class="toolkit-btn-title">SOS Strobe Light</div>
+                      <div class="toolkit-btn-desc">Morse code flash</div>
+                    </div>
+                  </div>
+
+                  <!-- Tool 2: Acoustic Whistle -->
+                  <div class="toolkit-btn whistle" onclick="toggleRescueWhistle()" id="btn-rescue-whistle">
+                    <span class="toolkit-btn-icon">🔊</span>
+                    <div class="toolkit-btn-text">
+                      <div class="toolkit-btn-title">Acoustic Whistle</div>
+                      <div class="toolkit-btn-desc" id="whistle-status-text">85dB sound pulse</div>
+                    </div>
+                  </div>
+
+                  <!-- Tool 3: First-Aid Action Cards -->
+                  <div class="toolkit-btn firstaid" onclick="openFirstAidModal()">
+                    <span class="toolkit-btn-icon">🩹</span>
+                    <div class="toolkit-btn-text">
+                      <div class="toolkit-btn-title">Survival First-Aid</div>
+                      <div class="toolkit-btn-desc">Emergency guides</div>
+                    </div>
+                  </div>
+
+                  <!-- Tool 4: Blackout Battery Saver -->
+                  <div class="toolkit-btn blackout" onclick="toggleBlackoutSaver()" id="btn-blackout-saver">
+                    <span class="toolkit-btn-icon">🔋</span>
+                    <div class="toolkit-btn-text">
+                      <div class="toolkit-btn-title">Blackout Saver</div>
+                      <div class="toolkit-btn-desc" id="blackout-status-text">72h battery mode</div>
+                    </div>
+                  </div>
+
+                  <!-- Tool 5: Offline P2P LifeFinder Survivor Proximity Radar -->
+                  <div class="toolkit-btn lifefinder" onclick="openLifeFinderModal()" style="grid-column: span 2; border-left: 3.5px solid #10b981;">
+                    <span class="toolkit-btn-icon">🛡️</span>
+                    <div class="toolkit-btn-text">
+                      <div class="toolkit-btn-title">LifeFinder BLE & P2P Survivor Radar</div>
+                      <div class="toolkit-btn-desc">Offline proximity scanner & acoustic sonar locator</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+<div class="offline-report-stats-strip" style="margin-top: 12px;">
+              <span class="stat-pill"><span class="pulse-dot-green"></span> <span id="stat-synced-count-tab">2 Synced to Central Server</span></span>
+              <span class="stat-pill"><span class="pulse-dot-amber"></span> <span id="stat-queued-count-tab">0 Queued in Gateway Flash</span></span>
+              <span class="stat-pill"><span class="pulse-dot-cyan"></span> <span>📱 P2P Wi-Fi Mesh: Ready (Port 8988)</span></span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+<!-- 📰 DEDICATED WEATHER NEWS & METEOROLOGICAL BULLETINS (OFFLINE-CACHED) -->
+      <section id="weather-news-container" class="weather-news-section hidden">
+        <div class="weather-news-header">
+          <div class="news-header-titles">
+            <div class="news-main-title">
+              <span>📰</span>
+              <span data-i18n="weather_news_title">Local Weather News & Regional Bulletins</span>
+            </div>
+            <div class="news-sub-title" data-i18n="weather_news_sub">Real-time & Offline-Cached Meteorological Advisories (Arunachal Corridor)</div>
+          </div>
+          <div id="news-connectivity-badge" class="news-badge-online">
+            <span class="pulse-dot"></span>
+            <span id="news-badge-text" data-i18n="live_synced_badge">🟢 Live IMD & Satellite Grid Synced</span>
+          </div>
+        </div>
+
+        <!-- Sector Filter Pills Bar -->
+        <div class="news-filter-pills-bar">
+          <button class="news-filter-pill active" data-filter="ALL" onclick="filterWeatherNews('ALL', this)" data-i18n="filter_all_sectors">All Sectors</button>
+          <button class="news-filter-pill" data-filter="Tawang" onclick="filterWeatherNews('Tawang', this)" data-i18n="filter_tawang">Tawang</button>
+          <button class="news-filter-pill" data-filter="Bomdila" onclick="filterWeatherNews('Bomdila', this)" data-i18n="filter_bomdila">Bomdila</button>
+          <button class="news-filter-pill" data-filter="Anini" onclick="filterWeatherNews('Anini', this)" data-i18n="filter_anini">Anini</button>
+          <button class="news-filter-pill" data-filter="Pasighat" onclick="filterWeatherNews('Pasighat', this)" data-i18n="filter_pasighat">Pasighat</button>
+          <button class="news-filter-pill" data-filter="Itanagar" onclick="filterWeatherNews('Itanagar', this)" data-i18n="filter_itanagar">Itanagar</button>
+        </div>
+
+        <!-- Offline Storage Notice Bar -->
+        <div class="news-offline-notice">
+          <span class="notice-icon">💾</span>
+          <span class="notice-text">Weather bulletins remain fully accessible in offline storage after connection is lost.</span>
+        </div>
+
+        <!-- Weather Bulletins Feed Container (Injected by JS) -->
+        <div id="weather-news-feed" class="weather-news-feed">
+          <!-- Dynamically populated by app.js -->
+        </div>
+
+        <!-- Refresh Action Button -->
+        <button id="btn-sync-weather" class="btn-sync-weather" onclick="syncWeatherNews()">
+          <span data-i18n="btn_sync_weather">🔄 Refresh Weather Bulletins</span>
+        </button>
+      </section>
+
+      <!-- ONLINE TABS WRAPPER (HIDDEN IN OFFLINE AUTO MODE) -->
+      <div id="online-tabs-wrapper">
+
+        <!-- TAB 1: SECTOR SELECTOR + GEOTECHNICAL AI TWIN + GIS MAP -->
+        <section id="tab-map" class="tab-pane active">
+        <div class="section-card text-center">
+          <div class="card-title-row" style="text-align: left; margin-bottom: 8px;">
+            <div class="card-title">📍 Select Arunachal Sector</div>
+            <div class="sector-header-actions">
+              <span id="gps-status-pill" class="gps-status-pill">📡 GPS Locating...</span>
+              <button id="btn-refresh-gps" class="btn-refresh-gps" onclick="requestAndApplyDeviceLocation(true)" title="Auto-Detect GPS Location">🎯 GPS</button>
+            </div>
+          </div>
+
+          <!-- GPS Auto-Locked Coordinates Banner -->
+          <div id="gps-auto-lock-banner" class="gps-lock-banner">
+            <div class="gps-lock-left">
+              <span class="pulse-dot-green"></span>
+              <div class="gps-lock-text-group">
+                <span id="gps-coords-display" class="gps-coords-title">📍 GPS Auto-Locating Device...</span>
+                <span id="gps-sector-match" class="gps-coords-sub">Directly auto-routing to closest disaster sector</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="custom-select-wrapper">
+            <select id="village-select" class="mobile-select"></select>
+          </div>
+
+          <div style="margin-top: 14px; margin-bottom: 4px;">
+            <div class="card-title">🧠 Geotechnical XGBoost AI Digital Twin</div>
+            <div class="card-subtitle">Calibrated for Arunachal Eastern Himalayan Rock Formations</div>
+          </div>
+
+          <!-- Circular Risk Meter -->
+          <div class="risk-gauge-wrapper">
+            <div class="gauge-ring">
+              <div id="sim-risk-score" class="gauge-number text-red">87.4%</div>
+              <div id="sim-risk-tier" class="gauge-label text-red">HIGH HAZARD</div>
+            </div>
+          </div>
+          <div id="sim-conf-band" class="conf-band-pill">Confidence Band: 87% ± 5% (Arunachal Physics)</div>
+
+          <!-- Interactive Geotechnical Sliders -->
+          <div class="sliders-list">
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label">🌧️ 24h Cumulative Rainfall</span>
+                <span id="sim-rain-val" class="slider-val text-blue">195 mm</span>
+              </div>
+              <input type="range" id="sim-rain-slider" class="range-slider" min="0" max="600" value="195">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label">⛰️ Terrain Slope Gradient</span>
+                <span id="sim-slope-val" class="slider-val text-cyan">50°</span>
+              </div>
+              <input type="range" id="sim-slope-slider" class="range-slider" min="15" max="60" value="50">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label">💧 Soil Moisture Saturation</span>
+                <span id="sim-soil-val" class="slider-val text-green">84%</span>
+              </div>
+              <input type="range" id="sim-soil-slider" class="range-slider" min="20" max="100" value="84">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label">📡 Sentinel-1 InSAR Slope Creep</span>
+                <span id="sim-insar-val" class="slider-val text-red">50.4 mm/yr</span>
+              </div>
+              <input type="range" id="sim-insar-slider" class="range-slider" min="0" max="65" value="50">
+            </div>
+          </div>
+
+          <!-- Active Geotechnical Triggers Box -->
+          <div class="triggers-card">
+            <div class="triggers-title">⚡ Active Geotechnical Triggers</div>
+            <div id="sim-triggers-box" class="triggers-container">
+              <!-- Rendered Dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- GIS Map Card (In Tab 1) -->
+        <div class="section-card map-card-container">
+          <div class="card-title-row">
+            <div class="card-title">🗺️ Arunachal Pradesh GIS Hazard Map</div>
+            <div class="map-nav-actions">
+              <button class="map-view-btn" onclick="zoomToIndia()">🌐 India</button>
+              <button class="map-view-btn active" onclick="zoomToSector()">📍 Sector</button>
+            </div>
+          </div>
+          <div class="map-sub-header">
+            <span class="map-legend-pill">🔴 High (&ge;70%) &nbsp; 🟡 Mod (40-69%) &nbsp; 🟢 Safe (&lt;40%)</span>
+          </div>
+          <div id="leaflet-map" class="mobile-map"></div>
+        </div>
+
+        <!-- 📊 TWIN AI RISK CHARTS (DYNAMIC ML MODEL FOR ARUNACHAL PLACES) -->
+        <div id="ai-twin-charts-container" class="ai-twin-charts-container">
+          <!-- Chart 1: Risk by Place (Vertical Bar Graph Fluctuating with ML Sliders) -->
+          <div class="twin-plot-card">
+            <div class="twin-plot-header-row">
+              <div class="twin-plot-title" data-i18n="risk_by_place_title">📊 Risk by Place</div>
+              <span id="active-place-pill" class="twin-live-badge">📍 Live ML Sync</span>
+            </div>
+            <div class="twin-plot-sub" data-i18n="risk_by_place_sub">Real-time XGBoost ML Hazard Probability across Arunachal Sectors</div>
+            <div id="plot-risk-by-village" class="twin-plot-canvas">
+              <!-- Rendered dynamically by app.js -->
+            </div>
+          </div>
+
+          <!-- Chart 2: Slope vs Risk (Scatter / Bubble Plot Fluctuating with ML Sliders) -->
+          <div class="twin-plot-card">
+            <div class="twin-plot-header-row">
+              <div class="twin-plot-title" data-i18n="slope_vs_risk_title">📈 Slope vs Risk</div>
+              <span class="twin-live-badge">⛰️ Slope Engine</span>
+            </div>
+            <div class="twin-plot-sub" data-i18n="slope_vs_risk_sub">Dynamic Terrain Slope Gradient vs Landslide Failure Probability</div>
+            <div id="plot-slope-vs-risk" class="twin-plot-canvas">
+              <!-- Rendered dynamically by app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 🌦️ FLUCTUATING 48H LOCAL WEATHER OFFICE PREDICTION (UNDER RISK GRAPH) -->
+        <div id="weather-prediction-card" class="section-card weather-prediction-card">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title" data-i18n="weather_prediction_title">🌦️ Local Weather Office 48h Prediction</div>
+              <div class="card-subtitle" data-i18n="weather_office_source">📡 Official Telemetry: Regional Met Centre (RMC Itanagar / IMD Arunachal)</div>
+            </div>
+            <span id="weather-station-badge" class="station-badge">📡 AWS SEN_AR_001</span>
+          </div>
+
+          <!-- Summary Metrics Grid -->
+          <div class="weather-summary-grid">
+            <div class="weather-sum-card">
+              <span class="wsum-lbl" data-i18n="past_24h_label">Past 24h Recorded</span>
+              <span id="wsum-past-val" class="wsum-val text-cyan">195 mm</span>
+              <span class="wsum-sub">Observed Downpour</span>
+            </div>
+            <div class="weather-sum-card">
+              <span class="wsum-lbl" data-i18n="next_24h_label">Next 24h Forecast</span>
+              <span id="wsum-next-val" class="wsum-val text-amber">165 mm</span>
+              <span class="wsum-sub">High Threat Surge</span>
+            </div>
+            <div class="weather-sum-card">
+              <span class="wsum-lbl" data-i18n="peak_hazard_window">Peak Hazard Window</span>
+              <span id="wsum-peak-val" class="wsum-val text-red">+6h to +12h</span>
+              <span class="wsum-sub">Max Rain Rate 32 mm/h</span>
+            </div>
+            <div class="weather-sum-card">
+              <span class="wsum-lbl">Current Wind & Gusts</span>
+              <span id="wsum-wind-val" class="wsum-val text-blue">38 km/h</span>
+              <span class="wsum-sub">Mountain Ridge Gusts</span>
+            </div>
+          </div>
+
+          <!-- Fluctuating 48-Hour Continuous Timeline Wave Chart -->
+          <div class="weather-chart-header">
+            <span class="chart-timeline-label">⏱️ 48-Hour Continuous Rain Intensity Curve (Past 24h & Next 24h)</span>
+            <span class="chart-now-badge" data-i18n="now_marker_label">NOW (Live)</span>
+          </div>
+          
+          <div id="weather-chart-container" class="weather-chart-container">
+            <!-- Dynamically injected SVG fluctuating graph -->
+          </div>
+
+          <!-- Weather Alert Notice from Local Weather Office -->
+          <div class="weather-office-alert-box">
+            <span class="alert-icon">⚡</span>
+            <span id="weather-forecast-note" class="alert-text" data-i18n="cloudburst_forecast_note">
+              ⚠️ Heavy cloudburst surge predicted between +6h and +12h. Soil saturation expected to exceed critical threshold.
+            </span>
+          </div>
+
+          <!-- Horizontal Scrollable Hourly Forecast Cards -->
+          <div class="hourly-forecast-wrapper">
+            <div class="hourly-scroll-title">📅 Hourly Timeline Breakdown (3-Hour Increments):</div>
+            <div id="hourly-forecast-strip" class="hourly-forecast-strip">
+              <!-- Dynamically populated by app.js -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: LIVE SENSOR TELEMETRY & DIJKSTRA CORRIDORS -->
+      <section id="tab-sim" class="tab-pane">
+        
+            <div class="section-card">
+          <div class="card-title-row">
+            <div class="card-title">📊 Sector Telemetry & Solar Nodes</div>
+            <span class="badge-count">LoRa Mesh</span>
+          </div>
+
+          <!-- Selected Village Live Telemetry Card -->
+          <div id="village-telemetry-box" class="telemetry-box" style="margin-top: 10px;">
+            <!-- Rendered Dynamically -->
+          </div>
+
+          <!-- Find Safest Route to Base Camp Action & Interactive Map -->
+          <div class="route-action-card" style="margin-top: 14px;">
+            <div class="route-header">
+              <span class="route-icon">🧭</span>
+              <div>
+                <div class="route-title">Safe Evacuation to Army Base Camp</div>
+                <div class="route-desc">Computes real-time safest route from your sector to the fortified Base Camp with terrain landmarks.</div>
+              </div>
+            </div>
+            <button id="calc-route-btn" class="btn-primary-gradient" onclick="findSafestRouteToBaseCamp()">
+              🧭 Find Safest Route to Base Camp
+            </button>
+
+            <!-- Dynamic Route Map & Landmarks (Hidden until button is clicked) -->
+            <div id="route-map-container" class="route-map-wrapper hidden" style="margin-top: 14px;">
+              <div class="route-stats-row">
+                <div class="route-stat-item">
+                  <span class="stat-lbl">📏 Total Distance</span>
+                  <span id="route-dist-val" class="stat-num text-cyan">28.4 km</span>
+                </div>
+                <div class="route-stat-item">
+                  <span class="stat-lbl">⏱️ Est. Travel Time</span>
+                  <span id="route-time-val" class="stat-num text-green">45 mins</span>
+                </div>
+                <div class="route-stat-item">
+                  <span class="stat-lbl">🛡️ Safety Index</span>
+                  <span id="route-safety-val" class="stat-num text-green">98.2% Safe</span>
+                </div>
+              </div>
+
+              <!-- Interactive Route Map Container -->
+              <div id="telemetry-route-map" class="mobile-route-map"></div>
+
+              <!-- Route Landmarks Checklist -->
+              <div class="landmarks-container">
+                <div class="landmarks-title">📍 Route Landmarks & Evacuation Waypoints</div>
+                <div id="route-landmarks-list" class="landmarks-list">
+                  <!-- Rendered Dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- OFFICIAL GOVERNMENT & DISTRICT COLLECTOR SITUATION PDF DISPATCH -->
+          <div class="gov-dispatch-card" style="margin-top: 14px;">
+            <div class="gov-dispatch-header">
+              <div class="gov-badge-row">
+                <span class="gov-pill-badge" data-i18n="gov_dispatch_badge">🏛️ OFFICIAL DISPATCH</span>
+                <span class="gov-sec-badge">DDMA / SDMA ITANAGAR</span>
+              </div>
+              <div class="gov-card-title" data-i18n="gov_dispatch_title">Government & District Collector Situation Report</div>
+              <div class="gov-card-desc" data-i18n="gov_dispatch_sub">Compiles real-time weather metrics, geotechnical risk index, and 48-hour future disaster forecasts into an official DDMA Situation Directive for administrative action.</div>
+            </div>
+
+            <button id="btn-generate-gov-pdf" class="btn-gov-dispatch" onclick="generateAndSendGovPDF()">
+              <span class="btn-gov-icon">📄</span>
+              <span id="btn-gov-text" class="btn-gov-text" data-i18n="btn_gov_dispatch">Generate Situation PDF & Send to District Collector / Govt</span>
+            </button>
+
+            <!-- Dispatch Status Tracker (Revealed on click) -->
+            <div id="gov-dispatch-tracker" class="gov-dispatch-tracker hidden">
+              <div class="dispatch-progress-bar">
+                <div id="dispatch-progress-fill" class="dispatch-progress-fill"></div>
+              </div>
+              <div id="dispatch-status-msg" class="dispatch-status-msg">
+                <span class="dispatch-pulse-dot"></span>
+                <span id="dispatch-status-text">Preparing Official Disaster Situation PDF...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: BHASHINI REGIONAL VOICE ALERTS & SIREN -->
+      <section id="tab-alerts" class="tab-pane">
+        <div class="section-card">
+          <div class="card-title">🚨 Bhashini Multi-Channel Voice & Siren</div>
+          <div class="card-subtitle">Dispatches voice alerts in Arunachal tribal dialects & English</div>
+
+          <!-- Language Selector Pills (Arunachal Focus) -->
+          <div class="lang-pills-scroll">
+            <button class="lang-pill active" data-lang="Adi">Adi (Arunachal)</button>
+            <button class="lang-pill" data-lang="Monpa">Monpa (Tawang)</button>
+            <button class="lang-pill" data-lang="Hindi">Hindi</button>
+            <button class="lang-pill" data-lang="English">English</button>
+          </div>
+
+          <!-- Broadcast Message Card -->
+          <div id="broadcast-text-box" class="broadcast-card">
+            <!-- Rendered Dynamically -->
+          </div>
+
+          <!-- Action Buttons Row -->
+          <div class="action-buttons-grid">
+            <button id="play-voice-btn" class="btn-action btn-voice">
+              <span class="btn-icon">🔊</span>
+              <span class="btn-text">Speak Audio (TTS)</span>
+            </button>
+            <button id="toggle-siren-btn" class="btn-action btn-siren">
+              <span class="btn-icon">🚨</span>
+              <span class="btn-text">Trigger 85dB Siren</span>
+            </button>
+          </div>
+
+          <button id="dispatch-alert-btn" class="btn-danger-gradient" onclick="dispatchEmergencyAlert()">
+            📡 Transmit High-Risk Evacuation Advisory (Arunachal)
+          </button>
+
+          <button id="btn-send-local-mobiles" class="btn-action-mobile-broadcast" onclick="sendMsgToLocalMobiles()">
+            <span class="btn-icon">📲</span>
+            <span class="btn-text" data-i18n="btn_send_local_mobiles">Send Msg to Local Mobiles</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TAB 4: ARUNACHAL MICRO-EVACUATION ROSTER -->
+      <section id="tab-evac" class="tab-pane">
+        <div class="section-card">
+          <!-- Polished Spacious Header Card -->
+          <div class="evac-hero-header">
+            <div class="evac-badge-row">
+              <span class="evac-hero-badge" data-i18n="evac_hero_badge">👨‍👩‍👧 ARUNACHAL DEFENSE PROTOCOL</span>
+              <span class="evac-live-badge" data-i18n="evac_gnn_badge">⚡ GNN AI ENGINE ACTIVE</span>
+            </div>
+            <h2 class="evac-main-title" data-i18n="evac_main_title">Micro-Evacuation Priority Roster</h2>
+            <p class="evac-main-desc" data-i18n="evac_main_desc">Graph Neural Network ranked vulnerable households across Tawang, Anini, and Bomdila corridors based on terrain proximity, infant/elderly density, and dynamic slope failure thresholds.</p>
+            
+            <div class="evac-stats-strip">
+              <div class="evac-stat-cell">
+                <span class="stat-icon">🏡</span>
+                <div class="stat-meta">
+                  <div class="stat-val text-red" data-i18n="evac_stat_homes">5 Priority Homes</div>
+                  <div class="stat-lbl" data-i18n="evac_stat_homes_lbl">Critical Evacuation</div>
+                </div>
+              </div>
+              <div class="evac-stat-cell">
+                <span class="stat-icon">🏕️</span>
+                <div class="stat-meta">
+                  <div class="stat-val text-cyan" data-i18n="evac_stat_shelters">100% Assigned</div>
+                  <div class="stat-lbl" data-i18n="evac_stat_shelters_lbl">Fortified Shelters</div>
+                </div>
+              </div>
+              <div class="evac-stat-cell">
+                <span class="stat-icon">⏱️</span>
+                <div class="stat-meta">
+                  <div class="stat-val text-green" data-i18n="evac_stat_window">15 Min Window</div>
+                  <div class="stat-lbl" data-i18n="evac_stat_window_lbl">Safe Transit Margin</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="households-list" class="households-cards-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: CITIZEN HAZARD REPORTING & YOLOv8 -->
+      <section id="tab-report" class="tab-pane">
+        <div class="section-card">
+          <div class="card-title">📸 Citizen Hazard Report & YOLOv8</div>
+          <div class="card-subtitle">Tension crack verification on NH-13 / Sela Pass Corridor</div>
+
+          <form onsubmit="submitCrowdsourceHazard(event)" class="mobile-form">
+            <div class="form-group">
+              <label class="form-label">Citizen Scout Name</label>
+              <input type="text" id="cs-citizen-name" class="mobile-input" value="Tenzing Monpa (Tawang Sector, Sela Ridge)" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Observed Hazard Type</label>
+              <select id="cs-hazard-type" class="mobile-select">
+                <option>Sela Pass Ridge Tension Crack (3.5m Fissure)</option>
+                <option>Active Mudflow across NH-13 at Baisakhi</option>
+                <option>Retaining Wall Bulge near Bomdila</option>
+                <option>Dibang River Sudden Turbidity & Muddying</option>
+              </select>
+            </div>
+
+            <!-- Simulated Camera Upload Card -->
+            <div class="camera-dropzone">
+              <div class="camera-icon">📷</div>
+              <div class="camera-text">Photo Captured: <code>Sela_Pass_Fissure_GPS.jpg</code></div>
+              <div class="yolo-detected-badge">✅ YOLOv8: Tension Crack Detected (94.2% Conf)</div>
+              <div class="sha-tag">SHA-256: 7f8a92b1... Verified on Arunachal Ledger</div>
+            </div>
+
+            <button type="submit" class="btn-success-gradient">
+              🚀 Submit Verified Report (+10 Pts)
+            </button>
+          </form>
+        </div>
+      </section>
+
+      </div><!-- END ONLINE TABS WRAPPER -->
+
+      <!-- 🔍 KPI METRIC INTERACTIVE DETAIL MODAL / DRAWER -->
+      <div id="kpi-detail-modal" class="kpi-modal-overlay hidden" onclick="closeKpiModalOnBackdrop(event)">
+        <div class="kpi-modal-dialog">
+          <div class="kpi-modal-header">
+            <div class="kpi-modal-title-group">
+              <span id="kpi-modal-icon" class="kpi-modal-icon">📊</span>
+              <div>
+                <h3 id="kpi-modal-title" class="kpi-modal-title">Sector Details</h3>
+                <p id="kpi-modal-subtitle" class="kpi-modal-subtitle">Geotechnical Sensor Telemetry</p>
+              </div>
+            </div>
+            <button class="kpi-modal-close-btn" onclick="closeKpiModal()" title="Close Details">✖</button>
+          </div>
+          <div id="kpi-modal-body" class="kpi-modal-body">
+            <!-- Dynamic Content Injected by app.js -->
+          </div>
+          <div class="kpi-modal-footer">
+            <button class="btn-modal-dismiss" onclick="closeKpiModal()">Done & Close</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🆘 OFFLINE COMMUNITY HAZARD REPORT DRAWER / MODAL -->
+      <div id="offline-help-modal" class="offline-help-modal-overlay hidden" onclick="closeOfflineHelpOnBackdrop(event)">
+        <div class="offline-help-dialog">
+          <div class="help-dialog-header">
+            <div class="help-dialog-title-group">
+              <span class="help-header-icon">🆘</span>
+              <div>
+                <h3 class="help-dialog-title">Offline Hazard & Help Report</h3>
+                <p class="help-dialog-subtitle">Routed via Local Gateway: ARUNACHAL_GW_001 (192.168.1.1)</p>
+              </div>
+            </div>
+            <button class="help-close-btn" onclick="closeOfflineHelpDrawer()" title="Close">✖</button>
+          </div>
+
+          <div class="help-dialog-body">
+            <!-- Tri-State Network Status Pill -->
+            <div class="tri-status-pill-box">
+              <div class="tri-status-item">
+                <span class="tri-label">Phone Internet:</span>
+                <span class="tri-badge badge-red">❌ Offline</span>
+              </div>
+              <div class="tri-status-item">
+                <span class="tri-label">P2P Wi-Fi Mesh:</span>
+                <span id="p2p-wifi-mesh-status-pill" class="tri-badge badge-cyan">🟢 Active (:8988)</span>
+              </div>
+              <div class="tri-status-item">
+                <span class="tri-label">Local Gateway:</span>
+                <span id="gateway-server-uplink-status" class="tri-badge badge-green">🟢 192.168.1.1</span>
+              </div>
+            </div>
+
+            <!-- 📡 P2P WI-FI SHARING & PEER RELAY TECHNOLOGY CARD (ZERO INTERNET) -->
+            <div class="p2p-mesh-card">
+              <div class="p2p-card-header">
+                <div class="p2p-title-group">
+                  <span class="p2p-badge-pulse"></span>
+                  <span class="p2p-card-title">📡 Peer-to-Peer (P2P) Wi-Fi Message Sharing</span>
+                </div>
+                <span class="p2p-mode-pill" id="active-p2p-mode-badge">⚡ Smart Auto-Mesh</span>
+              </div>
+              
+              <div class="p2p-card-desc">
+                Share messages directly mobile-to-mobile with <b>zero cellular / zero internet</b>. If this phone cannot reach the gateway, a nearby connected phone will automatically relay it!
+              </div>
+
+              <!-- P2P Route Mode Switcher -->
+              <div class="p2p-route-selector">
+                <button type="button" class="p2p-route-tab active" id="tab-route-auto" onclick="setP2pRouteMode('AUTO_MESH')">
+                  ⚡ Smart Mesh (Auto)
+                </button>
+                <button type="button" class="p2p-route-tab" id="tab-route-peer" onclick="setP2pRouteMode('P2P_RELAY')">
+                  📱 Mobile ➔ Mobile P2P
+                </button>
+                <button type="button" class="p2p-route-tab" id="tab-route-gw" onclick="setP2pRouteMode('DIRECT_GATEWAY')">
+                  📡 Direct Gateway
+                </button>
+              </div>
+
+              <!-- Live P2P Topology Visualizer -->
+              <div class="p2p-topology-diagram">
+                <div class="topology-node node-origin">
+                  <span class="node-icon">📱</span>
+                  <span class="node-label">This Phone</span>
+                  <span class="node-sub" id="p2p-local-ip-badge">IP: 192.168.43.X</span>
+                </div>
+
+                <div class="topology-link">
+                  <span class="link-wave"></span>
+                  <span class="link-label" id="p2p-link-type-label">P2P Wi-Fi Direct</span>
+                </div>
+
+                <div class="topology-node node-peer" id="topology-peer-node">
+                  <span class="node-icon">📱</span>
+                  <span class="node-label" id="topology-peer-name">Nearby Mobile B</span>
+                  <span class="node-sub" id="topology-peer-role">Relay / Judge Phone</span>
+                </div>
+
+                <div class="topology-link link-secondary" id="topology-link-gw">
+                  <span class="link-wave"></span>
+                  <span class="link-label">Local Mesh</span>
+                </div>
+
+                <div class="topology-node node-gateway" id="topology-gw-node">
+                  <span class="node-icon">📡</span>
+                  <span class="node-label">Gateway</span>
+                  <span class="node-sub">192.168.1.1</span>
+                </div>
+              </div>
+
+              <!-- Peer Target Configuration Row -->
+              <div class="p2p-peer-config-box">
+                <div class="peer-input-row">
+                  <span class="peer-target-label">🎯 Target Peer Mobile IP:</span>
+                  <input type="text" id="target-peer-ip-input" class="peer-ip-input" value="192.168.43.1" placeholder="192.168.43.1 (Hotspot AP)">
+                  <button type="button" class="btn-scan-peers" onclick="scanNearbyP2pPeers()" title="Scan for nearby phones">
+                    🔍 Scan Peers
+                  </button>
+                </div>
+                <div id="p2p-detected-peers-strip" class="p2p-detected-peers-strip">
+                  <span class="detected-peer-chip active" onclick="selectTargetPeer('192.168.43.1')">
+                    🟢 Peer A: 192.168.43.1 (Hotspot Gateway)
+                  </span>
+                  <span class="detected-peer-chip" onclick="selectTargetPeer('192.168.43.2')">
+                    📱 Peer B: 192.168.43.2 (Nearby Mobile)
+                  </span>
+                </div>
+              </div>
+
+              <!-- 🛰️ Continuous Live GPS Telemetry Stream (Presentation Demo Mode) -->
+              <div class="p2p-live-stream-box">
+                <div class="p2p-stream-info">
+                  <span class="stream-title">🛰️ Continuous Live GPS Sensor Stream (Zero Internet):</span>
+                  <span class="stream-sub">Beams live GNSS coordinates every 3s to peer mobiles over Wi-Fi mesh for prototype demos</span>
+                </div>
+                <button type="button" id="btn-toggle-p2p-beacon" class="btn-toggle-p2p-beacon" onclick="toggleContinuousP2pBeacon()">
+                  <span id="beacon-toggle-icon">📡</span>
+                  <span id="beacon-toggle-text">Start Live GPS Stream (3s Pulse)</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Voice Recording Module -->
+            <div class="help-form-section">
+              <label class="help-section-label">🎙️ Voice Note / Audio Message (Zero Internet):</label>
+              <div class="voice-recorder-card">
+                <div class="voice-recorder-top">
+                  <button type="button" id="btn-voice-record" class="btn-voice-record" onclick="toggleVoiceRecording()">
+                    <span id="voice-record-icon">⏺️</span>
+                    <span id="voice-record-text">Start Voice Recording</span>
+                  </button>
+                  <span id="voice-timer" class="voice-timer">00:00</span>
+                </div>
+                <div id="voice-waveform" class="voice-waveform hidden">
+                  <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
+                  <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
+                  <span class="wave-bar"></span><span class="wave-bar"></span><span class="wave-bar"></span>
+                </div>
+                <div id="voice-preview-box" class="voice-preview-box hidden">
+                  <audio id="voice-audio-preview" controls class="voice-audio-element"></audio>
+                  <button type="button" class="btn-discard-audio" onclick="discardVoiceRecording()" title="Re-record">🗑️ Discard</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Emergency Quick Tags -->
+            <div class="help-form-section">
+              <label class="help-section-label">⚡ Quick Observation & Situation Tags:</label>
+              <div class="quick-tags-grid">
+                <button type="button" class="tag-btn active" onclick="toggleHelpTag(this)">🚨 Trapped / Need Rescue</button>
+                <button type="button" class="tag-btn" onclick="toggleHelpTag(this)">💥 Heavy Rockfall</button>
+                <button type="button" class="tag-btn" onclick="toggleHelpTag(this)">⚡ Ground Crack / Fissure</button>
+                <button type="button" class="tag-btn" onclick="toggleHelpTag(this)">🌊 Mudflow / Water Seepage</button>
+                <button type="button" class="tag-btn" onclick="toggleHelpTag(this)">🚧 Road Cutoff / Blocked</button>
+              </div>
+            </div>
+
+            <!-- Location & GPS Telemetry (Captured via Device Location) -->
+            <div class="help-form-section">
+              <label class="help-section-label">📍 Offline GPS Coordinates (Device Sensors):</label>
+              <div class="gps-telemetry-box">
+                <div class="gps-coords-row">
+                  <span class="gps-coords-val" id="offline-gps-display">Lat: 27.5841° N, Lon: 91.8742° E</span>
+                  <button type="button" class="btn-refresh-gps" onclick="captureOfflineGPS()" title="Refresh GPS">🔄 Refresh GPS</button>
+                </div>
+                <div class="gps-meta-row">
+                  <span id="gps-accuracy-display">Accuracy: ±4.2m (Hardware GNSS)</span>
+                  <span id="gps-timestamp-display">Timestamp: 2026-09-01 16:30 IST</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Optional Text Note -->
+            <div class="help-form-section">
+              <label class="help-section-label">📝 Additional Details / Resident Name (Optional):</label>
+              <input type="text" id="help-resident-name" class="help-text-input" placeholder="Your Name or House No. (e.g., Tenzing / H-14)" style="margin-bottom: 6px;">
+              <textarea id="help-text-note" class="help-text-input" placeholder="Describe trapped individuals, damaged buildings, or landmark locations..." rows="2"></textarea>
+            </div>
+
+            <!-- Submission Status Feedback Box -->
+            <div id="help-submit-status-box" class="help-status-feedback hidden"></div>
+
+            <!-- Expandable P2P Transmission Ledger -->
+            <div class="p2p-ledger-container">
+              <div class="p2p-ledger-header" onclick="toggleP2pLedger()">
+                <span>📜 P2P Transmissions & Sent Ledger (<span id="p2p-sent-count-badge">0</span>)</span>
+                <span id="p2p-ledger-caret">▼</span>
+              </div>
+              <div id="p2p-ledger-content" class="p2p-ledger-content hidden">
+                <div id="p2p-ledger-list" class="p2p-ledger-list">
+                  <div class="p2p-ledger-empty">No P2P messages transmitted in this session yet.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hackathon Multi-Action Footer -->
+          <div class="help-dialog-footer p2p-dual-footer">
+            <!-- Primary Button: Send to Local Gateway / P2P Mesh -->
+            <button id="btn-send-gateway-report" class="btn-send-gateway-report" onclick="submitOfflineGatewayReport()">
+              🚀 SEND REPORT TO LOCAL GATEWAY (192.168.1.1)
+            </button>
+
+            <!-- Alternative Sharing Channels (Quick Share & Optical QR) -->
+            <div class="p2p-secondary-actions">
+              <button type="button" class="btn-p2p-secondary" onclick="shareViaQuickShare()" title="Beam via Android Quick Share / Wi-Fi Direct">
+                📲 Beam via Quick Share
+              </button>
+              <button type="button" class="btn-p2p-secondary" onclick="showOfflineQrBeam()" title="Show Offline QR Code for Judges to Scan">
+                ⚡ Show Offline QR Beam
+              </button>
+              <button type="button" class="btn-p2p-secondary" onclick="simulateIncomingP2pDemo()" title="Test Live Incoming Alert Simulation">
+                🧪 Test Incoming Alert
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🚨 INCOMING P2P EMERGENCY ALERT MODAL (POPS UP ON PHONE 2 WHEN RECEIVED) -->
+      <div id="incoming-p2p-alert-modal" class="incoming-p2p-modal-overlay hidden">
+        <div class="incoming-p2p-dialog">
+          <div class="incoming-p2p-header">
+            <div class="incoming-header-beacon">
+              <span class="beacon-pulse">🚨</span>
+            </div>
+            <div>
+              <h3 class="incoming-dialog-title">INCOMING P2P EMERGENCY ALERT!</h3>
+              <p class="incoming-dialog-sub">Received Directly from Nearby Mobile via P2P Wi-Fi (Zero Internet)</p>
+            </div>
+            <button class="incoming-close-btn" onclick="closeIncomingP2pAlert()">✖</button>
+          </div>
+
+          <div class="incoming-p2p-body">
+            <!-- Packet Metadata Strip -->
+            <div class="incoming-meta-strip">
+              <span class="inc-pill">📡 P2P Packet ID: <b id="inc-packet-id">PKT-84291</b></span>
+              <span class="inc-pill">⏱️ <span id="inc-timestamp">Just Now</span></span>
+              <span class="inc-pill">📶 Wi-Fi Direct: <b id="inc-hop-count">Direct Hop</b></span>
+            </div>
+
+            <!-- Resident & Situation -->
+            <div class="incoming-data-card">
+              <div class="inc-field-row">
+                <span class="inc-label">👤 Sender / Resident:</span>
+                <span class="inc-val bold text-cyan" id="inc-resident-name">Tenzing / H-14</span>
+              </div>
+              <div class="inc-field-row">
+                <span class="inc-label">📍 GPS Coordinates:</span>
+                <span class="inc-val bold text-emerald" id="inc-gps-coords">Lat: 27.5841° N, Lon: 91.8742° E</span>
+              </div>
+              <div class="inc-field-row">
+                <span class="inc-label">⚡ Emergency Situation:</span>
+                <div class="inc-tags-box" id="inc-tags-container">
+                  <span class="inc-tag-badge">🚨 Trapped / Need Rescue</span>
+                  <span class="inc-tag-badge">💥 Heavy Rockfall</span>
+                </div>
+              </div>
+              <div class="inc-field-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+                <span class="inc-label">📝 Text Message:</span>
+                <div class="inc-text-box" id="inc-text-note">
+                  "Rockfall has blocked the main road. 3 people trapped in shelter. Need immediate medical & rescue team!"
+                </div>
+              </div>
+            </div>
+
+            <!-- Voice Recording Playback Card -->
+            <div id="inc-voice-card" class="incoming-voice-card">
+              <div class="inc-voice-header">
+                <span>🎙️ Emergency Voice Recording (Transmitted over P2P):</span>
+                <span class="pulse-dot-green"></span>
+              </div>
+              <audio id="inc-voice-audio" controls class="inc-audio-player"></audio>
+            </div>
+
+            <!-- Relay Confirmation Status -->
+            <div id="inc-relay-feedback" class="inc-relay-feedback">
+              🟢 Ready to forward this packet to Local Gateway (192.168.1.1)
+            </div>
+          </div>
+
+          <div class="incoming-p2p-footer">
+            <button class="btn-relay-p2p" onclick="relayIncomingReportToGateway()">
+              🚀 RELAY PACKET TO LOCAL GATEWAY (192.168.1.1)
+            </button>
+            <button class="btn-dismiss-p2p" onclick="closeIncomingP2pAlert()">
+              Dismiss Alert
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ⚡ OFFLINE HIGH-DENSITY DISASTER QR BEAM MODAL -->
+      <div id="offline-qr-beam-modal" class="qr-beam-modal-overlay hidden" onclick="closeQrBeamModal(event)">
+        <div class="qr-beam-dialog">
+          <div class="qr-beam-header">
+            <div class="qr-title-group">
+              <span>⚡</span>
+              <h3>Offline Disaster Optical QR Beam</h3>
+            </div>
+            <button class="help-close-btn" onclick="closeQrBeamModalDirect()">✖</button>
+          </div>
+          <div class="qr-beam-body">
+            <p class="qr-sub-desc">
+              Judges can point any smartphone camera at this screen with <b>Zero Internet / Zero Wi-Fi</b> to instantly read the cryptographic emergency report.
+            </p>
+            <div class="qr-box-wrapper">
+              <div id="qr-code-canvas-container" class="qr-canvas-box">
+                <!-- High-density QR code rendered dynamically -->
+              </div>
+            </div>
+            <div class="qr-packet-preview" id="qr-packet-preview-text">
+              Payload: Encrypted Emergency Disaster Packet (GPS, Tags, Hash)
+            </div>
+          </div>
+          <div class="qr-beam-footer">
+            <button class="btn-close-qr" onclick="closeQrBeamModalDirect()">Done & Close</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- 📱 FIXED MODERN BOTTOM NAVIGATION BAR -->
+          <!-- 📱 FIXED MODERN BOTTOM NAVIGATION BAR (ONLINE) -->
+      <nav id="online-bottom-nav" class="bottom-nav-bar">
+        <button class="nav-tab-item active" data-tab="tab-map">
+          <span class="nav-icon">🗺️</span>
+          <span class="nav-label" data-i18n="nav_ai_twin">AI Twin</span>
+        </button>
+        <button class="nav-tab-item" data-tab="tab-sim">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label" data-i18n="nav_telemetry">Telemetry</span>
+        </button>
+        <button class="nav-tab-item" data-tab="tab-alerts">
+          <span class="nav-icon">🚨</span>
+          <span class="nav-label" data-i18n="nav_alerts">Alerts</span>
+        </button>
+        <button class="nav-tab-item" data-tab="tab-evac">
+          <span class="nav-icon">🛡️</span>
+          <span class="nav-label" data-i18n="nav_evacuation">Evacuation</span>
+        </button>
+        <button class="nav-tab-item" data-tab="tab-report">
+          <span class="nav-icon">📝</span>
+          <span class="nav-label" data-i18n="nav_report">Report</span>
+        </button>
+      </nav>
+
+      <!-- 📡 FIXED BOTTOM NAVIGATION BAR (OFFLINE MODE) -->
+      <nav id="offline-bottom-nav" class="bottom-nav-bar hidden" style="border-color: rgba(16, 185, 129, 0.35);">
+        <button class="offline-nav-item active" onclick="switchOfflineTab('tab-offline-monitor')">
+          <span class="nav-icon">📡</span>
+          <span class="nav-label">Monitor</span>
+        </button>
+        <button class="offline-nav-item" onclick="switchOfflineTab('tab-offline-routes')">
+          <span class="nav-icon">🧭</span>
+          <span class="nav-label">Safe Routes</span>
+        </button>
+        <button class="offline-nav-item" onclick="switchOfflineTab('tab-offline-report')">
+          <span class="nav-icon">🆘</span>
+          <span class="nav-label">Report</span>
+        </button>
+      </nav>
+
+  </div>
+
+  <!-- 🌐 STARTUP & ON-DEMAND LANGUAGE SELECTION MODAL -->
+  <div id="startup-language-modal" class="startup-lang-overlay hidden">
+    <div class="startup-lang-card">
+      <div class="lang-modal-header">
+        <div class="lang-globe-icon">🌐</div>
+        <div class="lang-modal-title-box">
+          <h2 class="lang-modal-title" data-i18n="lang_modal_title">Select Language / भाषा चुनें</h2>
+          <p class="lang-modal-subtitle" data-i18n="lang_modal_subtitle">Choose your preferred language for landslide early warning & civil defense</p>
+        </div>
+      </div>
+
+      <!-- 4 Language Options Grid (English, Hindi, Assamese, Bengali) -->
+      <div class="lang-options-grid">
+        <div class="lang-opt-card active" onclick="selectStartupLanguage('en')" data-lang-code="en">
+          <div class="lang-opt-left">
+            <span class="lang-opt-flag">🇬🇧</span>
+            <div>
+              <div class="lang-opt-native">English</div>
+              <div class="lang-opt-eng">Default System</div>
+            </div>
+          </div>
+          <div class="lang-opt-check">✓</div>
+        </div>
+
+        <div class="lang-opt-card" onclick="selectStartupLanguage('hi')" data-lang-code="hi">
+          <div class="lang-opt-left">
+            <span class="lang-opt-flag">🇮🇳</span>
+            <div>
+              <div class="lang-opt-native">हिन्दी</div>
+              <div class="lang-opt-eng">Hindi (National Official)</div>
+            </div>
+          </div>
+          <div class="lang-opt-check">✓</div>
+        </div>
+
+        <div class="lang-opt-card" onclick="selectStartupLanguage('as')" data-lang-code="as">
+          <div class="lang-opt-left">
+            <span class="lang-opt-flag">🏔️</span>
+            <div>
+              <div class="lang-opt-native">অসমীয়া</div>
+              <div class="lang-opt-eng">Assamese (Northeast Regional)</div>
+            </div>
+          </div>
+          <div class="lang-opt-check">✓</div>
+        </div>
+
+        <div class="lang-opt-card" onclick="selectStartupLanguage('bn')" data-lang-code="bn">
+          <div class="lang-opt-left">
+            <span class="lang-opt-flag">🌿</span>
+            <div>
+              <div class="lang-opt-native">বাংলা</div>
+              <div class="lang-opt-eng">Bengali (Northeast Regional)</div>
+            </div>
+          </div>
+          <div class="lang-opt-check">✓</div>
+        </div>
+      </div>
+
+      <!-- Confirm / Continue Button -->
+      <button id="lang-continue-btn" class="btn-lang-continue" onclick="confirmLanguageSelection()">
+        <span data-i18n="lang_continue_btn">Continue to App</span> →
+      </button>
+    </div>
+  </div>
+
+  <!-- 🧭 ROUTE FINDING SIMULATION & OPERATIONS MODAL (4-5s) -->
+  <div id="route-finding-modal" class="route-finding-overlay hidden">
+    <div class="route-finding-card">
+      <div class="radar-scan-container">
+        <div class="radar-sweep-ring ring-3"></div>
+        <div class="radar-sweep-ring ring-2"></div>
+        <div class="radar-sweep-ring ring-1"></div>
+        <div class="radar-sweep-beam"></div>
+        <div class="radar-center-icon">🛰️</div>
+      </div>
+      <div class="route-finding-title" data-i18n="radar_modal_title">FINDING SAFEST BASE CAMP ROUTE</div>
+      <div class="route-finding-subtitle" data-i18n="radar_modal_sub">Arunachal Geotechnical Physics & Risk-Cost Corridor Pathfinding</div>
+      
+      <!-- Progress Bar -->
+      <div class="route-progress-bar-container">
+        <div id="route-progress-fill" class="route-progress-fill" style="width: 0%;"></div>
+      </div>
+      <div class="route-progress-meta">
+        <span id="route-progress-status-text">Initializing GIS Topography Engine...</span>
+        <span id="route-progress-pct-text">0%</span>
+      </div>
+
+      <!-- Step-by-Step Operations Log -->
+      <div id="route-finding-log" class="route-finding-log">
+        <!-- Dynamically appended by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 🗺️ FULL-SCREEN IMMERSIVE EVACUATION ROUTE OVERLAY -->
+  <div id="fullscreen-route-overlay" class="fullscreen-route-overlay hidden">
+    <!-- Floating Header with Back Arrow Button -->
+    <div class="fullscreen-route-header">
+      <button type="button" class="btn-route-back" onclick="closeFullscreenRoute()" title="Return to Main Tab">
+        <span class="back-arrow-icon">←</span>
+        <span class="back-text" data-i18n="return_to_telemetry">Return to Telemetry</span>
+      </button>
+      <div class="fullscreen-header-title-group">
+        <div id="fs-route-title" class="fs-title" data-i18n="fs_route_title">Safest Evacuation Route</div>
+        <div id="fs-route-sector-pill" class="fs-sector-pill">Tawang Sector</div>
+      </div>
+    </div>
+
+    <!-- Floating Quick Stats Ribbon -->
+    <div class="fullscreen-stats-ribbon">
+      <div class="fs-stat-item">
+        <span class="fs-stat-lbl" data-i18n="fs_stat_distance">📏 Total Distance</span>
+        <span id="fs-dist-val" class="fs-stat-val text-cyan">28.4 km</span>
+      </div>
+      <div class="fs-stat-item">
+        <span class="fs-stat-lbl" data-i18n="fs_stat_travel_time">⏱️ Travel Time</span>
+        <span id="fs-time-val" class="fs-stat-val text-green">45 mins</span>
+      </div>
+      <div class="fs-stat-item">
+        <span class="fs-stat-lbl" data-i18n="fs_stat_safety_index">🛡️ Safety Index</span>
+        <span id="fs-safety-val" class="fs-stat-val text-green">98.2% Safe</span>
+      </div>
+      <div class="fs-stat-item">
+        <span class="fs-stat-lbl" data-i18n="fs_stat_blocked_road">⛔ Blocked Road</span>
+        <span class="fs-stat-val text-red" data-i18n="fs_stat_avoided">Avoided</span>
+      </div>
+    </div>
+
+    <!-- Fullscreen Interactive Leaflet Map Container -->
+    <div id="fullscreen-telemetry-map" class="fullscreen-map-container"></div>
+
+    <!-- Collapsible Bottom Landmarks & Evacuation Waypoints Drawer -->
+    <div id="fs-landmarks-sheet" class="fullscreen-landmarks-sheet">
+      <div class="sheet-header" onclick="toggleLandmarksDrawer()">
+        <div class="sheet-pill-handle"></div>
+        <div class="sheet-title-row">
+          <span class="sheet-title" data-i18n="fs_landmarks_title">📍 Route Landmarks & Evacuation Waypoints</span>
+          <span id="sheet-toggle-icon" class="sheet-toggle-icon">▲</span>
+        </div>
+      </div>
+      <div id="fs-landmarks-list" class="fs-landmarks-list">
+        <!-- Dynamically injected by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 📲 LOCAL MOBILES DISPATCH RECEIPT MODAL -->
+  <div id="local-mobiles-modal" class="local-mobiles-overlay hidden">
+    <div class="local-mobiles-card">
+      <div class="mobiles-modal-header">
+        <div class="mobiles-beacon-icon">📲</div>
+        <div>
+          <h2 class="mobiles-modal-title" data-i18n="local_mobiles_modal_title">LOCAL CELL BROADCAST & LORA SMS DISPATCH</h2>
+          <p class="mobiles-modal-subtitle" data-i18n="local_mobiles_modal_sub">Direct Emergency Alert Transmitted to All Citizen Phones in Sector</p>
+        </div>
+      </div>
+
+      <div class="mobiles-message-preview">
+        <div class="preview-label">📢 Dispatched Alert Message (Audio Broadcast Sync):</div>
+        <div id="mobiles-msg-text" class="preview-text">...</div>
+      </div>
+
+      <div class="mobiles-stats-grid">
+        <div class="mstat-card">
+          <span class="mstat-lbl" data-i18n="mobiles_alerted_label">Mobiles Alerted</span>
+          <span id="mobiles-count-val" class="mstat-val text-cyan">1,842 Phones</span>
+        </div>
+        <div class="mstat-card">
+          <span class="mstat-lbl" data-i18n="broadcast_protocol_label">Protocol</span>
+          <span class="mstat-val text-amber">Cell Broadcast + LoRa</span>
+        </div>
+        <div class="mstat-card">
+          <span class="mstat-lbl" data-i18n="delivery_status_label">Delivery Status</span>
+          <span class="mstat-val text-green">99.7% Acknowledged</span>
+        </div>
+      </div>
+
+      <button class="btn-close-mobiles-modal" onclick="closeLocalMobilesModal()">
+        <span data-i18n="btn_dismiss_alert">Close Receipt</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 🏛️ GOVERNMENT & DISTRICT COLLECTOR SITUATION REPORT PDF VIEWER MODAL -->
+  <div id="gov-pdf-modal" class="gov-pdf-overlay hidden">
+    <div class="gov-pdf-container">
+      <div class="gov-pdf-topbar">
+        <div class="gov-pdf-topbar-left">
+          <span class="gov-pdf-icon">🤖</span>
+          <div>
+            <div class="gov-pdf-topbar-title" data-i18n="pdf_modal_title">AI Early-Warning Disaster Prediction Dossier</div>
+            <div class="gov-pdf-topbar-sub" data-i18n="pdf_modal_sub">NER-KAVACH Autonomous AI Sentinel • Dispatched to District Collector & Local Administration</div>
+          </div>
+        </div>
+        <button class="gov-pdf-close-btn" onclick="closeGovPdfModal()" title="Close Viewer">✖</button>
+      </div>
+
+      <!-- Printable / Document Body -->
+      <div id="gov-pdf-document" class="gov-pdf-doc-body">
+        
+        <!-- AI System Header & Official Transmission Letterhead -->
+        <div class="ai-doc-header">
+          <div class="ai-badge-chip">
+            <span class="ai-pulse-glow">⚡</span>
+            <span>NER-KAVACH 3.0 • AUTONOMOUS AI DISASTER SENTINEL</span>
+          </div>
+          <div class="ai-doc-title">AUTONOMOUS AI EARLY-WARNING INTELLIGENCE DOSSIER</div>
+          <div class="ai-doc-subtitle">DISASTER PREDICTION, GEOTECHNICAL FAILURE DYNAMICS & PRESCRIPTIVE MITIGATION DIRECTIVE</div>
+          
+          <div class="ai-dispatch-route-box">
+            <div class="route-origin">
+              <span class="route-lbl">ORIGINATING AI CORE:</span>
+              <span class="route-val">🤖 NER-KAVACH Edge-AI Sentinel (v3.4) • Physics-Informed Neural Network</span>
+            </div>
+            <div class="route-arrow">➔ DISPATCHED TO LOCAL GOVERNANCE:</div>
+            <div class="route-dest">
+              <span class="route-val font-bold">🏛️ Office of the Deputy Commissioner & District Magistrate (District Collector)</span>
+              <span class="route-sub">District Emergency Operations Centre (DEOC) & SDMA, Government of Arunachal Pradesh</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Model & Neural Inference Metadata Strip -->
+        <div class="ai-metadata-strip">
+          <div class="meta-pill">
+            <span class="m-lbl">Model Architecture:</span>
+            <span class="m-val">PI-GNN v3.4 + XGBoost Ensemble</span>
+          </div>
+          <div class="meta-pill">
+            <span class="m-lbl">Inference Latency:</span>
+            <span class="m-val">18.2 ms (On-Device Neural NPU)</span>
+          </div>
+          <div class="meta-pill">
+            <span class="m-lbl">Bayesian Confidence:</span>
+            <span class="m-val text-success">96.8% Statistical Certainty</span>
+          </div>
+          <div class="meta-pill">
+            <span class="m-lbl">Autonomous Trigger:</span>
+            <span class="m-val text-alert">Failure Threat &gt; 65% Threshold</span>
+          </div>
+        </div>
+
+        <!-- Administrative Reference & Priority Row -->
+        <div class="doc-meta-row">
+          <div><b>AI DOSSIER SERIAL:</b> <span id="doc-memo-no">AI-WARN/2026/AR-871</span></div>
+          <div><b>GENERATED &amp; TRANSMITTED:</b> <span id="doc-timestamp">03-SEP-2026 12:35 IST</span></div>
+        </div>
+        <div class="doc-meta-row">
+          <div><b>TARGET JURISDICTION:</b> <span id="doc-sector-name" class="text-bold">Tawang Sector (AR_01) — Arunachal Pradesh</span></div>
+          <div><b>EARLY ACTION PRIORITY:</b> <span class="doc-priority-badge">FLASH LEVEL-3 • IMMEDIATE MITIGATION</span></div>
+        </div>
+
+        <!-- Section 1: 🧠 AI Predictive Synthesis & Causality Diagnosis -->
+        <div class="doc-section">
+          <div class="doc-section-title">
+            <span class="sec-icon">🧠</span> 1. AI PREDICTIVE SYNTHESIS &amp; CAUSALITY DIAGNOSIS
+          </div>
+          <div class="ai-synthesis-box">
+            <div class="ai-tag">AUTONOMOUS NLP SYNTHESIS (ON-DEVICE GEMINI/TRANSFORMER CORE)</div>
+            <p id="doc-ai-narrative" class="ai-narrative-text">
+              The NER-KAVACH Autonomous AI Engine has detected critical slope destabilization in the active sector. Multi-sensor fusion correlates 24-hour precipitation with severe pore-water saturation. Combined with steep terrain inclination and continuous radar line-of-sight satellite displacement, the physics-informed AI model forecasts a high probability of structural slope collapse within the upcoming 6 to 12 hour cloudburst window. Immediate administrative intervention and pre-emptive micro-evacuation are mandated to prevent civilian casualties.
+            </p>
+          </div>
+        </div>
+
+        <!-- Section 2: 📊 AI Multi-Modal Sensor Telemetry & Anomaly Analysis Matrix -->
+        <div class="doc-section">
+          <div class="doc-section-title">
+            <span class="sec-icon">📊</span> 2. AI MULTI-MODAL TELEMETRY &amp; ANOMALY MATRIX
+          </div>
+          <div class="doc-table-wrapper">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Telemetry Channel</th>
+                  <th>Observed Reading</th>
+                  <th>AI Normal Baseline</th>
+                  <th>Anomaly Delta &amp; Status</th>
+                  <th>AI Weight</th>
+                </tr>
+              </thead>
+              <tbody id="doc-telemetry-tbody">
+                <!-- Populated dynamically by app.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 3: 🔮 Deep Learning 48-Hour Disaster & Cloudburst Trajectory Forecast -->
+        <div class="doc-section">
+          <div class="doc-section-title">
+            <span class="sec-icon">🔮</span> 3. DEEP LEARNING 48-HOUR DISASTER &amp; CLOUDBURST TRAJECTORY
+          </div>
+          <div class="ai-timeline-forecast">
+            <div class="timeline-station-hdr">
+              <b>Issuing Radar &amp; Sensor Node:</b> <span id="doc-forecast-station">IMD AWS Tawang &amp; Solar Mesh SEN_AR_001</span>
+            </div>
+            
+            <div class="ai-trajectory-grid">
+              <!-- +0h to +6h -->
+              <div class="traj-card">
+                <div class="traj-time">+0h to +6h</div>
+                <div class="traj-phase">Pre-Saturation Phase</div>
+                <div class="traj-metric">Rain: <b id="traj-r1">25-45 mm</b></div>
+                <div class="traj-pore">Pore Sat: <b>78%</b></div>
+                <div class="traj-risk risk-moderate">MODERATE RISK</div>
+                <div class="traj-desc">Ground moisture infiltration accelerating; tension micro-cracks widening.</div>
+              </div>
+
+              <!-- +6h to +12h -->
+              <div class="traj-card traj-critical">
+                <div class="traj-time">+6h to +12h</div>
+                <div class="traj-phase">CRITICAL CLOUDBURST PEAK</div>
+                <div class="traj-metric">Rain: <b id="traj-r2">32.4 mm/h Peak</b></div>
+                <div class="traj-pore">Pore Sat: <b class="text-red">92% Liquefaction</b></div>
+                <div class="traj-risk risk-high">🔴 CATASTROPHIC FAILURE PEAK</div>
+                <div class="traj-desc">Critical threshold breach along Sela Ridge &amp; NH-13. Severe mudslide &amp; debris torrents.</div>
+              </div>
+
+              <!-- +12h to +24h -->
+              <div class="traj-card">
+                <div class="traj-time">+12h to +24h</div>
+                <div class="traj-phase">Secondary Debris Phase</div>
+                <div class="traj-metric">Rain: <b id="traj-r3">45 mm cumulative</b></div>
+                <div class="traj-pore">Pore Sat: <b>85%</b></div>
+                <div class="traj-risk risk-high">HIGH COLLATERAL HAZARD</div>
+                <div class="traj-desc">Residual downstream flooding; transport arterial severed at Mile 42.</div>
+              </div>
+
+              <!-- +24h to +48h -->
+              <div class="traj-card">
+                <div class="traj-time">+24h to +48h</div>
+                <div class="traj-phase">Stabilization &amp; Drainage</div>
+                <div class="traj-metric">Rain: <b id="traj-r4">18 mm tapering</b></div>
+                <div class="traj-pore">Pore Sat: <b>62%</b></div>
+                <div class="traj-risk risk-moderate">MONITORING PHASE</div>
+                <div class="traj-desc">Slow pore drainage; high risk of opportunistic cut-slope washouts.</div>
+              </div>
+            </div>
+
+            <div id="doc-forecast-note" class="forecast-advisory">
+              ⚠️ AI Alert: Extreme cloudburst surge model matches June 2024 Sela event pattern. Early preventive highway interdiction required.
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: ⚡ AI-Prescribed Action Directives for Local Government & District Collector -->
+        <div class="doc-section">
+          <div class="doc-section-title">
+            <span class="sec-icon">⚡</span> 4. AI-PRESCRIBED MITIGATION DIRECTIVES FOR DISTRICT COLLECTOR
+          </div>
+          <div class="ai-directives-container">
+            <div class="ai-directive-item">
+              <span class="dir-num">01</span>
+              <div>
+                <b>ORDER IMMEDIATE PRE-EMPTIVE MICRO-EVACUATION:</b>
+                <p>Deploy local village defense volunteers to transition the top 5 GNN-identified priority households (elderly/infants within 15m of tension slip face) to the fortified Army Base Camp shelter within the 15-minute safety window.</p>
+              </div>
+            </div>
+            <div class="ai-directive-item">
+              <span class="dir-num">02</span>
+              <div>
+                <b>HIGHWAY INTERDICTION &amp; TRAFFIC HALT:</b>
+                <p>Order immediate closure of NH-13 (Baisakhi / Sela Pass Corridor) to civilian transport. Instruct Border Roads Organisation (BRO) project Vartak to pre-position heavy earthmoving machinery at Mile 42.</p>
+              </div>
+            </div>
+            <div class="ai-directive-item">
+              <span class="dir-num">03</span>
+              <div>
+                <b>NDRF 12TH BATTALION &amp; DEOC READINESS:</b>
+                <p>Place District Emergency Operations Centre (DEOC) on Level-3 RED ALERT status. Mobilize NDRF quick-response teams to forward staging areas at Dirang and Tawang.</p>
+              </div>
+            </div>
+            <div class="ai-directive-item">
+              <span class="dir-num">04</span>
+              <div>
+                <b>AUTONOMOUS CITIZEN LORA MESH BROADCAST:</b>
+                <p>Solar LoRa Gateway (192.168.1.1) is autonomously broadcasting synthesized tribal audio advisories (Monpa &amp; Adi) directly to offline civilian handsets across the sector.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5: 🤖 Cryptographic AI Certification & Government Receipt -->
+        <div class="doc-footer-seal">
+          <div class="seal-left">
+            <div class="ai-official-stamp-box">
+              <div class="ai-stamp-inner">
+                <span class="stamp-chip">⚡ NER-KAVACH 3.0</span>
+                <span class="stamp-bold">AUTONOMOUS AI SENTINEL</span>
+                <span class="stamp-verified">★ CERTIFIED AI EARLY PREDICTION ★</span>
+                <span class="stamp-route">DISPATCHED TO DC &amp; SDMA VIA LORA MESH</span>
+              </div>
+              <div class="ai-stamp-caption">TAMPER-PROOF AI CRYPTOGRAPHIC SEAL</div>
+            </div>
+          </div>
+          
+          <div class="seal-center">
+            <div class="ai-hash-box">
+              <div class="hash-title">NEURAL NETWORK INFERENCE HASH</div>
+              <div id="doc-ai-hash" class="hash-code">SHA256: d4a19c8f3b207e5e1a90c4d28e7f11a6</div>
+              <div class="hash-status">✓ Encrypted Blockchain State Ledger Verified</div>
+            </div>
+          </div>
+
+          <div class="seal-right">
+            <div class="collector-receipt-box">
+              <div class="receipt-header">OFFICIAL GOVERNMENT RECIPIENT ACKNOWLEDGMENT</div>
+              <div class="receipt-row"><b>Recipient:</b> District Collector &amp; District Magistrate</div>
+              <div class="receipt-row"><b>Authority:</b> Chairman, DDMA Arunachal Pradesh</div>
+              <div class="receipt-row"><b>Transmission:</b> DEOC Automated Receiver Node (ACK: 200 OK)</div>
+              <div class="receipt-sig-area">
+                <div class="receipt-sig-line">Awaiting Incident Commander Digital / Manual Ratification</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Bar -->
+      <div class="gov-pdf-actions">
+        <button class="btn-pdf-download" onclick="downloadGovSituationPDF()">
+          <span data-i18n="btn_download_pdf">📥 Download AI Dossier (PDF)</span>
+        </button>
+        <button class="btn-pdf-print" onclick="printGovSituationPDF()">
+          <span data-i18n="btn_print_pdf">🖨️ Print / Save as PDF</span>
+        </button>
+        <button class="btn-pdf-close" onclick="closeGovPdfModal()">
+          <span data-i18n="btn_close_pdf">✖ Close Viewer</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🚨 INCOMING P2P EMERGENCY HAZARD REPORT MODAL (POPS UP ON PHONE 2 WHEN RECEIVED OVER P2P WI-FI) -->
+  <div id="incoming-p2p-alert-modal" class="incoming-p2p-modal-overlay hidden">
+    <div class="incoming-p2p-dialog">
+      <div class="incoming-p2p-header">
+        <div class="incoming-header-beacon">
+          <span class="beacon-pulse">🚨</span>
+        </div>
+        <div style="flex: 1;">
+          <h3 class="incoming-dialog-title">INCOMING P2P HAZARD REPORT!</h3>
+          <p class="incoming-dialog-sub">Received Directly from Peer Mobile via P2P Wi-Fi (Zero Internet)</p>
+        </div>
+        <button class="incoming-close-btn" onclick="closeIncomingP2pAlert()">✖</button>
+      </div>
+
+      <div class="incoming-p2p-body">
+        <!-- Packet Metadata Strip -->
+        <div class="incoming-meta-strip">
+          <span class="inc-pill">📡 Packet: <b id="inc-packet-id">PKT-84291</b></span>
+          <span class="inc-pill">⏱️ <span id="inc-timestamp">Just Now</span></span>
+          <span class="inc-pill">📶 Path: <b id="inc-hop-count">Direct P2P Hop</b></span>
+        </div>
+
+        <!-- Resident & Situation -->
+        <div class="incoming-data-card">
+          <div class="inc-field-row">
+            <span class="inc-label">👤 Sender / Resident:</span>
+            <span class="inc-val bold text-cyan" id="inc-resident-name">Tenzing / H-14</span>
+          </div>
+          <div class="inc-field-row">
+            <span class="inc-label">📍 Live GPS Coordinates:</span>
+            <span class="inc-val bold text-emerald" id="inc-gps-coords">Lat: 27.5892° N, Lon: 91.8654° E (±3.8m Hardware GNSS)</span>
+          </div>
+          <div class="inc-field-row">
+            <span class="inc-label">⚡ Hazard Tags:</span>
+            <div class="inc-tags-box" id="inc-tags-container">
+              <span class="inc-tag-badge">🚨 Trapped / Need Rescue</span>
+              <span class="inc-tag-badge">💥 Heavy Rockfall</span>
+              <span class="inc-tag-badge">🚧 Road Cutoff / Blocked</span>
+            </div>
+          </div>
+          <div class="inc-field-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+            <span class="inc-label">📝 Situation Details:</span>
+            <div class="inc-text-box" id="inc-text-note">
+              Major rockfall debris blocking NH-13 sector at km 42. Two resident vehicles trapped. Requesting rapid clearing team.
+            </div>
+          </div>
+        </div>
+
+        <!-- Voice Recording Playback Card -->
+        <div id="inc-voice-card" class="incoming-voice-card hidden">
+          <div class="inc-voice-header">
+            <span>🎙️ Emergency Voice Recording (P2P Audio):</span>
+            <span class="pulse-dot-green"></span>
+          </div>
+          <audio id="inc-voice-audio" controls class="inc-audio-player"></audio>
+        </div>
+
+        <!-- Relay Confirmation Status -->
+        <div id="inc-relay-feedback" class="inc-relay-feedback">
+          🟢 <b>Received via P2P Subnet (Zero Internet)</b> — Ready to forward to Local Gateway (192.168.1.1)
+        </div>
+      </div>
+
+      <div class="incoming-p2p-footer">
+        <button class="btn-relay-p2p" onclick="relayIncomingReportToGateway()">
+          🚀 RELAY PACKET TO LOCAL GATEWAY (192.168.1.1)
+        </button>
+        <button class="btn-dismiss-p2p" onclick="closeIncomingP2pAlert()">
+          Dismiss Alert
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaflet GIS Engine & Mobile Controller -->
+    <!-- 🗺️ FULLSCREEN OFFLINE SURROUNDINGS & MULTI-ROUTE EVACUATION MAP MODAL -->
+  <div id="offline-surroundings-modal" class="fullscreen-route-overlay hidden">
+    <div class="surroundings-modal-card">
+      <!-- Modal Header -->
+      <div class="surroundings-modal-header">
+        <div class="surroundings-header-left">
+          <div class="surroundings-beacon-dot"></div>
+          <div>
+            <div class="surroundings-title-row">
+              <span class="surroundings-main-title">OFFLINE SURROUNDINGS & EVACUATION MAP</span>
+              <span class="surroundings-badge-offline">100% OFFLINE</span>
+            </div>
+            <div class="surroundings-sub-title" id="surroundings-sector-coords">
+              📍 Current Position: Tawang Sector (27.5861° N, 91.8594° E) • LoRa Mesh Active
+            </div>
+          </div>
+        </div>
+        <button class="btn-close-surroundings" onclick="closeOfflineSurroundingsMap()" title="Close Map">
+          ✕
+        </button>
+      </div>
+
+      <!-- Quick Surrounding Evacuation Camps Strip -->
+      <div class="surroundings-camps-bar">
+        <div class="camps-bar-header">
+          <span>🏕️ SURROUNDING EVACUATION CAMPS (ACTIVE HUBS):</span>
+          <span class="camps-count-tag">3 Nearby Shelters</span>
+        </div>
+        <div class="camps-chips-scroll" id="surroundings-camps-list">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+
+      <!-- Interactive Map Viewport -->
+      <div class="surroundings-map-wrapper">
+        <div id="offline-surroundings-leaflet-map" class="offline-surroundings-map-canvas"></div>
+        <!-- Map Floating Legend Overlay -->
+        <div class="surroundings-map-legend">
+          <div class="legend-item"><span class="legend-dot user-pos"></span> You</div>
+          <div class="legend-item"><span class="legend-dot camp-pos"></span> Camp</div>
+          <div class="legend-item"><span class="legend-line route-safe"></span> 94% Safe</div>
+          <div class="legend-item"><span class="legend-line route-mod"></span> 68% Caution</div>
+          <div class="legend-item"><span class="legend-line route-danger"></span> 18% Blocked</div>
+        </div>
+        <!-- Recenter Button -->
+        <button class="btn-map-recenter" onclick="recenterOfflineSurroundingsMap()" title="Recenter on Location">
+          📍 Recenter
+        </button>
+      </div>
+
+      <!-- Multi-Route Selector Carousel / Cards -->
+      <div class="surroundings-routes-section">
+        <div class="routes-section-title">
+          <span>🧭 MULTI-ROUTE EVACUATION OPTIONS & SAFETY RATINGS:</span>
+          <span class="routes-ai-tag">Geotechnical Slope Analysis</span>
+        </div>
+        <div class="routes-cards-grid" id="surroundings-routes-selector">
+          <!-- Route A Card (Safest) -->
+          <div id="route-card-A" class="route-select-card active safest" onclick="selectOfflineRoute('A')">
+            <div class="route-card-top">
+              <span class="route-name">Route A: Sela Ridge Bypass</span>
+              <span class="route-safety-badge safe">94% SAFE</span>
+            </div>
+            <div class="route-card-meta">
+              <span>📏 2.4 km</span>
+              <span>⏱️ 18 min</span>
+              <span>⛰️ +45m Ridge Pass</span>
+            </div>
+            <div class="route-card-desc">Stable granite bedrock ridge. Bypasses active mudflow zone completely.</div>
+          </div>
+
+          <!-- Route B Card (Alternative) -->
+          <div id="route-card-B" class="route-select-card moderate" onclick="selectOfflineRoute('B')">
+            <div class="route-card-top">
+              <span class="route-name">Route B: Valley Stream Corridor</span>
+              <span class="route-safety-badge moderate">68% CAUTION</span>
+            </div>
+            <div class="route-card-meta">
+              <span>📏 3.1 km</span>
+              <span>⏱️ 25 min</span>
+              <span>💧 Low Depression</span>
+            </div>
+            <div class="route-card-desc">Secondary escape track. Minor debris accumulation near stream bend.</div>
+          </div>
+
+          <!-- Route C Card (Hazard) -->
+          <div id="route-card-C" class="route-select-card hazardous" onclick="selectOfflineRoute('C')">
+            <div class="route-card-top">
+              <span class="route-name">Route C: Old NH-13 Highway</span>
+              <span class="route-safety-badge danger">18% BLOCKED</span>
+            </div>
+            <div class="route-card-meta">
+              <span>📏 1.8 km</span>
+              <span>⛔ Severe Hazard</span>
+              <span>🚧 Landslide Km 42</span>
+            </div>
+            <div class="route-card-desc">DO NOT USE: Active slope rupture and road fracture at Baisakhi sector.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Turn-by-Turn Landmark Safety Checklist -->
+      <div class="surroundings-turn-section">
+        <div class="turn-header">
+          <span class="turn-title" id="selected-route-turn-title">📍 Route A: Waypoints & Landmark Checklist</span>
+          <button class="btn-voice-guidance" onclick="playOfflineRouteVoice()">
+            <span class="voice-icon">🔊</span>
+            <span>Audio Guidance</span>
+          </button>
+        </div>
+        <div class="turn-list" id="surroundings-turn-checklist">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="surroundings-modal-footer">
+        <button class="btn-return-offline" onclick="closeOfflineSurroundingsMap()">
+          ◀ Return to Offline Landslide Monitor
+        </button>
+      </div>
+    </div>
+  </div>
+<script src="leaflet.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+
+    
+    <!-- 🚨 SOS STROBE FULLSCREEN BEACON MODAL -->
+    <div id="sos-strobe-modal" class="sos-strobe-overlay hidden">
+      <div class="sos-strobe-flash-screen" id="sos-strobe-flash-screen"></div>
+      <div class="sos-strobe-controls">
+        <div class="sos-strobe-badge">
+          <span class="pulse-dot-red"></span>
+          <span>🚨 SOS MORSE CODE BEACON ACTIVE (... --- ...)</span>
+        </div>
+        <div class="sos-strobe-warning">High-luminance emergency optical beacon for night rescue & helicopter localization</div>
+        <button class="btn-stop-strobe" onclick="closeSosStrobeModal()">
+          <span>✕ STOP STROBE BEACON</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 🩹 OFFLINE DISASTER FIRST-AID ACTION CARDS MODAL -->
+    <div id="first-aid-modal" class="first-aid-overlay hidden">
+      <div class="first-aid-card">
+        <div class="first-aid-header">
+          <div class="first-aid-title-box">
+            <span class="first-aid-icon">🩹</span>
+            <div>
+              <h2 class="first-aid-title">Disaster First-Aid & Survival</h2>
+              <div class="first-aid-subtitle">100% Offline Emergency Medical Action Cards</div>
+            </div>
+          </div>
+          <button class="btn-close-modal" onclick="closeFirstAidModal()">✕</button>
+        </div>
+
+        <!-- Category Selector Pills -->
+        <div class="fa-category-tabs">
+          <button class="fa-tab active" onclick="selectFirstAidCategory('bleeding')">🩸 Bleeding</button>
+          <button class="fa-tab" onclick="selectFirstAidCategory('fracture')">🦴 Fracture</button>
+          <button class="fa-tab" onclick="selectFirstAidCategory('landslide')">🌊 Landslide Signs</button>
+          <button class="fa-tab" onclick="selectFirstAidCategory('water')">💧 Water & Cold</button>
+        </div>
+
+        <!-- Card Content Body -->
+        <div class="fa-content-body" id="fa-content-body">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div class="fa-footer-actions">
+          <button class="btn-fa-voice" onclick="playFirstAidVoice()">
+            <span>🗣️ Read Instructions Aloud</span>
+          </button>
+          <button class="btn-fa-done" onclick="closeFirstAidModal()">Done</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🛡️ BLE & P2P "LIFEFINDER" OFFLINE SURVIVOR PROXIMITY RADAR MODAL -->
+    <div id="lifefinder-radar-modal" class="tactical-modal-overlay hidden">
+      <div class="tactical-modal-card radar-card">
+        <div class="tactical-modal-header">
+          <div class="tactical-header-title-box">
+            <span class="modal-badge-icon">🛡️</span>
+            <div>
+              <h2 class="tactical-modal-title">LifeFinder Survivor Radar</h2>
+              <div class="tactical-modal-sub">Offline BLE & P2P Proximity Locator • Acoustic Sonar</div>
+            </div>
+          </div>
+          <button class="btn-close-tactical-modal" onclick="closeLifeFinderModal()">✕</button>
+        </div>
+
+        <div class="tactical-modal-body radar-body">
+          <!-- Rotating Military Radar Screen -->
+          <div class="radar-scope-wrapper">
+            <div class="radar-scope-screen">
+              <div class="radar-sweep-beam"></div>
+              <div class="radar-ring ring-1"></div>
+              <div class="radar-ring ring-2"></div>
+              <div class="radar-ring ring-3"></div>
+              <div class="radar-axis h"></div>
+              <div class="radar-axis v"></div>
+
+              <!-- Radar Blip Targets -->
+              <div class="radar-blip blip-1" onclick="selectSurvivorTarget('Tashi (Squad 4)', '12 meters', '-58 dBm')">
+                <span class="blip-dot"></span>
+                <span class="blip-label">Tashi (12m)</span>
+              </div>
+              <div class="radar-blip blip-2 distress" onclick="selectSurvivorTarget('Survivor Beacon #04 (Trapped)', '24 meters', '-76 dBm')">
+                <span class="blip-dot"></span>
+                <span class="blip-label">⚠️ Beacon #04 (24m)</span>
+              </div>
+              <div class="radar-blip blip-3" onclick="selectSurvivorTarget('Medic Pema', '38 meters', '-86 dBm')">
+                <span class="blip-dot"></span>
+                <span class="blip-label">Pema (38m)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Target Telemetry & Acoustic Sonar Ping Controls -->
+          <div class="radar-target-card">
+            <div class="target-name-row">
+              <span class="target-title" id="target-name">Target: Survivor Beacon #04 (Trapped)</span>
+              <span class="target-dist-badge" id="target-dist">24 meters</span>
+            </div>
+            <div class="target-meta-row">
+              <span id="target-rssi">Signal Strength: -76 dBm (Moderate)</span>
+              <span>Elevation Delta: -2.4m Below Surface</span>
+            </div>
+            <div class="sonar-actions-row">
+              <button class="btn-sonar-ping" onclick="triggerSonarAcousticPing()" id="btn-sonar-ping">
+                <span>🔊 Acoustic Sonar Ping</span>
+              </button>
+              <button class="btn-mark-triaged" onclick="markTargetTriaged()">
+                <span>✅ Mark Rescued & Triaged</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tactical-modal-footer">
+          <button class="btn-tactical-action" onclick="refreshBleScan()">
+            <span>🔄 Re-Scan 360° BLE & P2P Beacon Frequency</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>

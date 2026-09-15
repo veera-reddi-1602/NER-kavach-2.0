@@ -1,0 +1,55 @@
+# ==============================================================================
+# 🛡️ NER KAVACH 3.0 — Git Ignore Configuration
+# ==============================================================================
+
+# Python transient build & cache artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+.pytest_cache/
+*.log
+
+# Temporary test screen captures
+vivo_*.png
+screen*.png
+wa_view.xml
+view.xml
+
+# Netlify & Cloudflare temporary caches
+.netlify/
+cloudflared.exe
+
+# Android Intermediate Compilation Artifacts
+android_native/build/
+android_native/bin/
+android_native/gen/
+android_native/.gradle/
+*.class
+
+# IDE & Editor caches
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ==============================================================================
+# Explicit Inclusions: Hold essential APK & Release Assets
+# ==============================================================================
+!android_native/NER_KAVACH_3.0.apk
+!android_native/ner_kavach_release.keystore
+!android_native/build_and_deploy.ps1
+!android_native/AndroidManifest.xml
+!android_native/src/**
+!android_native/res/**
+!android_native/assets/**
+!backend/models/*.pkl
+!backend/data/**

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NER KAVACH 3.0</string>
+    <string name="accessibility_service_desc">Automated Emergency Landslide Warning Dispatcher for WhatsApp</string>
+</resources>

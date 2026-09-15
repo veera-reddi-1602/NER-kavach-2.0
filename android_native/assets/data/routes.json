@@ -1,0 +1,42 @@
+{
+  "nodes": [
+    {"id": "N_CHERRA", "name": "Cherrapunji Town Center", "lat": 25.30, "lon": 91.70, "elevation": 1484, "village_id": "ML_01"},
+    {"id": "N_MAWSYN", "name": "Mawsynram Center", "lat": 25.29, "lon": 91.58, "elevation": 1400, "village_id": "ML_02"},
+    {"id": "N_SHILLONG", "name": "Shillong City Safe Zone", "lat": 25.57, "lon": 91.88, "elevation": 1525, "village_id": "ML_03"},
+    {"id": "N_MAWKODK", "name": "Mawkdok Bridge Junction", "lat": 25.39, "lon": 91.76, "elevation": 1580, "village_id": null},
+    {"id": "N_SOHRA_SHELTER", "name": "Sohra Community Shelter", "lat": 25.302, "lon": 91.705, "elevation": 1490, "village_id": "ML_01"},
+    {"id": "N_TAWANG", "name": "Tawang Valley Hub", "lat": 27.58, "lon": 91.87, "elevation": 3048, "village_id": "AR_01"},
+    {"id": "N_SELA", "name": "Sela Tunnel Entrance", "lat": 27.50, "lon": 92.10, "elevation": 3170, "village_id": null},
+    {"id": "N_BOMDILA", "name": "Bomdila Station", "lat": 27.26, "lon": 92.40, "elevation": 2217, "village_id": "AR_02"},
+    {"id": "N_RUPA_BYPASS", "name": "Rupa Forest Bypass Track", "lat": 27.20, "lon": 92.38, "elevation": 1850, "village_id": null},
+    {"id": "N_ITANAGAR", "name": "Itanagar Command Base", "lat": 27.08, "lon": 93.62, "elevation": 440, "village_id": "AR_03"},
+    {"id": "N_ANINI", "name": "Anini Remote Outpost", "lat": 28.79, "lon": 95.90, "elevation": 1968, "village_id": "AR_04"},
+    {"id": "N_DRI_RIDGE", "name": "Dri Valley Ridge Track (Safe)", "lat": 28.72, "lon": 95.82, "elevation": 1650, "village_id": null},
+    {"id": "N_GANGTOK", "name": "Gangtok Command Hub", "lat": 27.33, "lon": 88.61, "elevation": 1650, "village_id": "SK_01"},
+    {"id": "N_SINGTAM", "name": "Singtam Bridge", "lat": 27.23, "lon": 88.50, "elevation": 1390, "village_id": null},
+    {"id": "N_LACHUNG", "name": "Lachung High Village", "lat": 27.68, "lon": 88.74, "elevation": 2700, "village_id": "SK_02"},
+    {"id": "N_KATAO_RIDGE", "name": "Katao Ridge Emergency Shelter Track", "lat": 27.69, "lon": 88.76, "elevation": 2850, "village_id": null},
+    {"id": "N_CHUNGTHANG", "name": "Chungthang Confluence", "lat": 27.60, "lon": 88.64, "elevation": 1790, "village_id": "SK_05"},
+    {"id": "N_MANGAN_BYPASS", "name": "Mangan Upper Contour Safe Route", "lat": 27.52, "lon": 88.53, "elevation": 1450, "village_id": null}
+  ],
+  "edges": [
+    {"from": "N_CHERRA", "to": "N_MAWKODK", "road_name": "NH-6 Arterial Road", "distance_km": 18.5, "slope_penalty": 1.4, "is_blocked": true, "block_reason": "NH-6 Km 42 Landslide & Mudflow", "risk_index": 0.88},
+    {"from": "N_CHERRA", "to": "N_SOHRA_SHELTER", "road_name": "Local Sohra Shelter Feeder", "distance_km": 1.2, "slope_penalty": 1.05, "is_blocked": false, "block_reason": null, "risk_index": 0.15},
+    {"from": "N_CHERRA", "to": "N_MAWKODK", "road_name": "Mawkdok Ridge High Altitude Bypass", "distance_km": 24.0, "slope_penalty": 1.15, "is_blocked": false, "block_reason": null, "risk_index": 0.28},
+    {"from": "N_MAWKODK", "to": "N_SHILLONG", "road_name": "Shillong-Cherra Highway (Safe Upper Section)", "distance_km": 31.0, "slope_penalty": 1.10, "is_blocked": false, "block_reason": null, "risk_index": 0.20},
+    {"from": "N_MAWSYN", "to": "N_MAWKODK", "road_name": "Balat-Mawkdok Arterial", "distance_km": 22.0, "slope_penalty": 1.35, "is_blocked": false, "block_reason": null, "risk_index": 0.45},
+    {"from": "N_TAWANG", "to": "N_SELA", "road_name": "NH-13 Sela Main Highway", "distance_km": 38.0, "slope_penalty": 1.60, "is_blocked": true, "block_reason": "NH-13 Baisakhi Debris Flow", "risk_index": 0.92},
+    {"from": "N_TAWANG", "to": "N_SELA", "road_name": "Sela Military Ridge Alternative Track", "distance_km": 44.0, "slope_penalty": 1.20, "is_blocked": false, "block_reason": null, "risk_index": 0.32},
+    {"from": "N_SELA", "to": "N_BOMDILA", "road_name": "Trans-Arunachal Highway Sec 2", "distance_km": 42.0, "slope_penalty": 1.25, "is_blocked": false, "block_reason": null, "risk_index": 0.35},
+    {"from": "N_BOMDILA", "to": "N_ITANAGAR", "road_name": "NH-13 Kameng Main Route", "distance_km": 155.0, "slope_penalty": 1.50, "is_blocked": true, "block_reason": "Mudflow near Rupa", "risk_index": 0.85},
+    {"from": "N_BOMDILA", "to": "N_RUPA_BYPASS", "road_name": "Rupa Forest Emergency Loop", "distance_km": 14.0, "slope_penalty": 1.12, "is_blocked": false, "block_reason": null, "risk_index": 0.22},
+    {"from": "N_RUPA_BYPASS", "to": "N_ITANAGAR", "road_name": "Bhalukpong-Itanagar Southern Link", "distance_km": 168.0, "slope_penalty": 1.08, "is_blocked": false, "block_reason": null, "risk_index": 0.18},
+    {"from": "N_ANINI", "to": "N_DRI_RIDGE", "road_name": "Dri Mountain Safety Track (LoRa Beacons)", "distance_km": 18.0, "slope_penalty": 1.15, "is_blocked": false, "block_reason": null, "risk_index": 0.25},
+    {"from": "N_LACHUNG", "to": "N_CHUNGTHANG", "road_name": "North Sikkim Main Highway", "distance_km": 21.0, "slope_penalty": 1.70, "is_blocked": true, "block_reason": "Teesta Axis Avalanche & GLOF Damage", "risk_index": 0.95},
+    {"from": "N_LACHUNG", "to": "N_KATAO_RIDGE", "road_name": "Katao Ridge Shelter Track", "distance_km": 8.5, "slope_penalty": 1.18, "is_blocked": false, "block_reason": null, "risk_index": 0.24},
+    {"from": "N_CHUNGTHANG", "to": "N_SINGTAM", "road_name": "NH-10 Teesta Valley Route", "distance_km": 62.0, "slope_penalty": 1.80, "is_blocked": true, "block_reason": "NH-10 Active Breach at 29th Mile", "risk_index": 0.96},
+    {"from": "N_CHUNGTHANG", "to": "N_MANGAN_BYPASS", "road_name": "Mangan Upper Contour Safe Track", "distance_km": 28.0, "slope_penalty": 1.22, "is_blocked": false, "block_reason": null, "risk_index": 0.30},
+    {"from": "N_MANGAN_BYPASS", "to": "N_GANGTOK", "road_name": "North Sikkim High Elevation Safe Corridor", "distance_km": 45.0, "slope_penalty": 1.15, "is_blocked": false, "block_reason": null, "risk_index": 0.25},
+    {"from": "N_GANGTOK", "to": "N_SINGTAM", "road_name": "Ranipool Valley Highway", "distance_km": 24.0, "slope_penalty": 1.10, "is_blocked": false, "block_reason": null, "risk_index": 0.28}
+  ]
+}

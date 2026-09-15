@@ -1,0 +1,113 @@
+[
+  {
+    "report_id": "RPT-IDEMP-1788607290147",
+    "device_id": "DEVICE_ANON",
+    "user_name": "Local Resident",
+    "latitude": 28.794,
+    "longitude": 95.904,
+    "elevation_m": 0.0,
+    "timestamp": "2026-09-05 16:51:30 IST",
+    "hazard_tags": [
+      "🚧 Road Cutoff / Blocked"
+    ],
+    "help_note": "Idempotent duplicate check.",
+    "audio_filename": null,
+    "audio_url": null,
+    "gateway_id": "ARUNACHAL_GW_001",
+    "status": "COMMUNITY_OBSERVATION",
+    "synced_to_server_at": "2026-09-05 16:51:30 IST"
+  },
+  {
+    "report_id": "RPT-IDEMP-1788346464785",
+    "device_id": "DEVICE_ANON",
+    "user_name": "Local Resident",
+    "latitude": 28.794,
+    "longitude": 95.904,
+    "elevation_m": 0.0,
+    "timestamp": "2026-09-02 16:24:24 IST",
+    "hazard_tags": [
+      "🚧 Road Cutoff / Blocked"
+    ],
+    "help_note": "Idempotent duplicate check.",
+    "audio_filename": null,
+    "audio_url": null,
+    "gateway_id": "ARUNACHAL_GW_001",
+    "status": "COMMUNITY_OBSERVATION",
+    "synced_to_server_at": "2026-09-02 16:24:24 IST"
+  },
+  {
+    "report_id": "RPT-IDEMP-1788261749631",
+    "device_id": "DEVICE_ANON",
+    "user_name": "Local Resident",
+    "latitude": 28.794,
+    "longitude": 95.904,
+    "elevation_m": 0.0,
+    "timestamp": "2026-09-01 16:52:29 IST",
+    "hazard_tags": [
+      "🚧 Road Cutoff / Blocked"
+    ],
+    "help_note": "Idempotent duplicate check.",
+    "audio_filename": null,
+    "audio_url": null,
+    "gateway_id": "ARUNACHAL_GW_001",
+    "status": "COMMUNITY_OBSERVATION",
+    "synced_to_server_at": "2026-09-01 16:52:29 IST"
+  },
+  {
+    "report_id": "RPT-102401",
+    "device_id": "DEV-TEST-01",
+    "user_name": "Local Resident",
+    "latitude": 27.5841,
+    "longitude": 91.8742,
+    "elevation_m": 0.0,
+    "timestamp": "2026-09-01 16:52:05 IST",
+    "hazard_tags": [
+      "🚨 Trapped / Need Rescue"
+    ],
+    "help_note": "Monastery road landslide.",
+    "audio_filename": null,
+    "audio_url": null,
+    "gateway_id": "ARUNACHAL_GW_001",
+    "status": "VERIFIED_HIGH_PRIORITY",
+    "synced_to_server_at": "2026-09-01 16:52:05 IST",
+    "admin_verified_at": "2026-09-05 16:51:30 IST",
+    "admin_notes": "Confirmed by NDRF Scout Drone Survey Unit 02."
+  },
+  {
+    "report_id": "RPT-IDEMPOTENT-003",
+    "device_id": "DEVICE_ANON",
+    "user_name": "Local Resident",
+    "latitude": 28.794,
+    "longitude": 95.904,
+    "elevation_m": 0.0,
+    "timestamp": "2026-09-01 16:51:30 IST",
+    "hazard_tags": [
+      "🚧 Road Cutoff / Blocked"
+    ],
+    "help_note": "Idempotent duplicate check.",
+    "audio_filename": null,
+    "audio_url": null,
+    "gateway_id": "ARUNACHAL_GW_001",
+    "status": "COMMUNITY_OBSERVATION",
+    "synced_to_server_at": "2026-09-01 16:51:30 IST"
+  },
+  {
+    "report_id": "RPT-TEST-001",
+    "device_id": "DEV-TEST-PHONE",
+    "user_name": "Tenzing Tester",
+    "latitude": 27.5841,
+    "longitude": 91.8742,
+    "elevation_m": 3048.0,
+    "timestamp": "2026-09-01 16:51:30 IST",
+    "hazard_tags": [
+      "🚨 Trapped / Need Rescue",
+      "⚡ Ground Fissure"
+    ],
+    "help_note": "Testing offline gateway store-and-forward transmission.",
+    "audio_filename": "RPT-TEST-001.webm",
+    "audio_url": "/api/v1/audio/RPT-TEST-001.webm",
+    "gateway_id": "ARUNACHAL_GW_001",
+    "status": "COMMUNITY_OBSERVATION",
+    "synced_to_server_at": "2026-09-01 16:51:30 IST"
+  }
+]
